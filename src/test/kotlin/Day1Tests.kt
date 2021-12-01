@@ -19,4 +19,22 @@ class Day1Tests {
         val actual = day1Part1(sampleInput)
         assertEquals(actual, 7)
     }
+
+    @Test
+    fun testPart2Givens() {
+        val sampleInput = """
+            199
+            200
+            208
+            210
+            200
+            207
+            240
+            269
+            260
+            263
+        """.toInts()
+        val actual = day1Part2(sampleInput)
+        assertEquals(actual, 5)
+    }
 }
