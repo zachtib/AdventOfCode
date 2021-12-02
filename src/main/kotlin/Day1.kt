@@ -1,6 +1,6 @@
-import util.loadInts
 import util.part1Result
 import util.part2Result
+import util.resource
 
 fun day1Part1(input: List<Int>): Int {
     return input.windowed(2)
@@ -15,7 +15,7 @@ fun day1Part2(input: List<Int>): Int {
 }
 
 fun main() {
-    val input = "day1.txt".loadInts()
+    val input = resource("day1.txt").asInts()
     day1Part1(input).part1Result()
     day1Part2(input).part2Result()
 }
