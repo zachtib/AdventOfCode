@@ -13,18 +13,34 @@ data class SubmarineCommand(
     val amount: Int,
 )
 
-class Submarine {
+open class Submarine {
 
     var horizontal: Int = 0
-        private set
+        protected set
     var depth: Int = 0
-        private set
+        protected set
 
-    fun perform(command: SubmarineCommand) {
+    open fun perform(command: SubmarineCommand) {
         when (command.direction) {
             SubmarineDirection.FORWARD -> horizontal += command.amount
             SubmarineDirection.DOWN -> depth += command.amount
             SubmarineDirection.UP -> depth -= command.amount
+        }
+    }
+}
+
+class AdvancedSubmarine : Submarine() {
+    var aim: Int = 0
+        private set
+
+    override fun perform(command: SubmarineCommand) {
+        when (command.direction) {
+            SubmarineDirection.FORWARD -> {
+                horizontal += command.amount
+                depth += aim * command.amount
+            }
+            SubmarineDirection.DOWN -> aim += command.amount
+            SubmarineDirection.UP -> aim -= command.amount
         }
     }
 }
@@ -46,7 +62,11 @@ fun day2Part1(input: List<SubmarineCommand>): Int {
 }
 
 fun day2Part2(input: List<SubmarineCommand>): Int {
-    return 0
+    val submarine = AdvancedSubmarine()
+    for (command in input) {
+        submarine.perform(command)
+    }
+    return submarine.horizontal * submarine.depth
 }
 
 fun main() {
