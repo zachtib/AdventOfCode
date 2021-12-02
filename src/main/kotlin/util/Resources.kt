@@ -14,6 +14,7 @@ class Resource(private val url: URL) {
         return url
             .readText()
             .lines()
+            .filter { it.isNotBlank() }
     }
 
     fun <T> load(transform: (String) -> T): List<T> {

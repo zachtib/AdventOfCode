@@ -17,7 +17,7 @@ class Day1Tests {
             263
         """.toInts()
         val actual = day1Part1(sampleInput)
-        assertEquals(actual, 7)
+        assertEquals(7, actual)
     }
 
     @Test
@@ -35,6 +35,6 @@ class Day1Tests {
             263
         """.toInts()
         val actual = day1Part2(sampleInput)
-        assertEquals(actual, 5)
+        assertEquals(5, actual)
     }
 }
