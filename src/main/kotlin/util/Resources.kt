@@ -17,7 +17,7 @@ class Resource(private val url: URL) {
             .filter { it.isNotBlank() }
     }
 
-    fun <T> load(transform: (String) -> T): List<T> {
+    fun <T> asType(transform: (String) -> T): List<T> {
         return readLines().map(transform)
     }
 
@@ -26,7 +26,7 @@ class Resource(private val url: URL) {
     }
 
     fun asInts(): List<Int> {
-        return load { it.toInt() }
+        return asType { it.toInt() }
     }
 }
 
