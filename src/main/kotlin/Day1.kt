@@ -1,3 +1,4 @@
+import util.asInts
 import util.part1Result
 import util.part2Result
 import util.resource

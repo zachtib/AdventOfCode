@@ -1,3 +1,4 @@
+import util.asInts
 import util.resource
 import kotlin.test.Test
 import kotlin.test.assertEquals

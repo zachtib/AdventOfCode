@@ -1,7 +1,4 @@
-import util.part1Result
-import util.part2Result
-import util.resource
-import util.toBinaryInt
+import util.*
 
 
 class EmptyCollectionException : RuntimeException()

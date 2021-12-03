@@ -1,4 +1,5 @@
 import org.junit.Test
+import util.asType
 import util.resource
 import kotlin.test.assertEquals
 
