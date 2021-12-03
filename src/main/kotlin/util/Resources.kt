@@ -8,13 +8,21 @@ object Resources {
     fun load(name: String): URL? = javaClass.classLoader.getResource(name)
 }
 
-class Resource(private val url: URL) {
+class Resource(body: String) {
+
+    private val body: String
+    private val lines: List<String>
+
+    init {
+        this.body = body
+        this.lines = this.body.lines()
+            .filter { it.isNotBlank() }
+    }
+
+    constructor(url: URL) : this(url.readText())
 
     private fun readLines(): List<String> {
-        return url
-            .readText()
-            .lines()
-            .filter { it.isNotBlank() }
+        return lines.filter { it.isNotBlank() }
     }
 
     fun <T> asType(transform: (String) -> T): List<T> {
@@ -33,4 +41,8 @@ class Resource(private val url: URL) {
 fun resource(name: String): Resource {
     val url = Resources.load(name) ?: throw FileNotFoundException("Requested file, $name, not present in resources")
     return Resource(url)
+}
+
+fun resource(getString: () -> String): Resource {
+    return Resource(getString())
 }

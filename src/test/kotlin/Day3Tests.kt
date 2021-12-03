@@ -1,8 +1,10 @@
+import util.resource
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Day3Tests {
-    private val input = """
+    private val input = resource {
+        """
         00100
         11110
         10110
@@ -15,7 +17,8 @@ class Day3Tests {
         11001
         00010
         01010
-    """.asTestData()
+        """.trimIndent()
+    }.asStrings()
 
     @Test
     fun testPart1Givens() {

@@ -1,15 +1,18 @@
 import org.junit.Test
+import util.resource
 import kotlin.test.assertEquals
 
 class Day2Tests {
-    private val input = """
+    private val input = resource {
+        """
         forward 5
         down 5
         forward 8
         up 3
         down 8
         forward 2
-    """.asTestData { it.toSubmarineCommand() }
+        """.trimIndent()
+    }.asType { it.toSubmarineCommand() }
 
     @Test
     fun testPart1Givens() {
