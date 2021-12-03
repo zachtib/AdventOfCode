@@ -4,12 +4,12 @@ import java.io.FileNotFoundException
 import java.net.URL
 
 
-private object Resources {
-    fun load(name: String): URL? = javaClass.classLoader.getResource(name)
-}
-
 interface Resource {
     val lines: List<String>
+}
+
+private object ResourceLoader {
+    fun load(name: String): URL? = javaClass.classLoader.getResource(name)
 }
 
 private class UrlResource(private val url: URL) : Resource {
@@ -32,7 +32,7 @@ fun Resource.asStrings(): List<String> = lines
 fun Resource.asInts(): List<Int> = this.asType { it.toInt() }
 
 fun resource(name: String): Resource {
-    val url = Resources.load(name) ?: throw FileNotFoundException("Requested file, $name, not present in resources")
+    val url = ResourceLoader.load(name) ?: throw FileNotFoundException("Requested file, $name, not present in resources")
     return UrlResource(url)
 }
 
