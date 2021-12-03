@@ -3,18 +3,29 @@ import kotlin.test.assertEquals
 
 class Day3Tests {
     private val input = """
-        
+        00100
+        11110
+        10110
+        10111
+        10101
+        01111
+        00111
+        11100
+        10000
+        11001
+        00010
+        01010
     """.asTestData()
 
     @Test
     fun testPart1Givens() {
         val actual = day3Part1(input)
-        assertEquals(0, actual)
+        assertEquals(198, actual)
     }
 
     @Test
     fun testPart2Givens() {
         val actual = day3Part2(input)
-        assertEquals(0, actual)
+        assertEquals(230, actual)
     }
 }
