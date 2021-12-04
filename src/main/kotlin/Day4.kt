@@ -3,6 +3,16 @@ import util.part1Result
 import util.part2Result
 import util.resource
 
+data class BingoBoardsWithInputs(
+    val inputs: List<Int>,
+    val boards: List<BingoBoard>,
+)
+
+class BingoBoard(val board: String)
+
+
+fun String.toBingoBoard(): BingoBoard = BingoBoard(this)
+
 fun day4Part1(input: Any): Int {
     return -1
 }

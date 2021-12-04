@@ -1,4 +1,6 @@
+import util.asComplexType
 import util.resource
+import util.toListOfInts
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -26,6 +28,17 @@ class Day4Tests {
             22 11 13  6  5
              2  0 12  3  7
         """.trimIndent()
+    }.asComplexType {
+        BingoBoardsWithInputs(
+            inputs = takeOne { it.toListOfInts() },
+            boards = takeRemaining { it.toBingoBoard() },
+        )
+    }
+
+    @Test
+    fun testResourceLoading() {
+        assertEquals(27, sampleInput.inputs.size)
+        assertEquals(3, sampleInput.boards.size)
     }
 
     @Test
