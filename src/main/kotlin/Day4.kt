@@ -78,7 +78,19 @@ fun day4Part1(input: BingoBoardsWithInputs): Int {
     return -1
 }
 
-fun day4Part2(input: Any): Int {
+fun day4Part2(input: BingoBoardsWithInputs): Int {
+    var previouslySolvedBoards = listOf<BingoBoard>()
+    for (number in input.inputs) {
+        input.boards.forEach { board -> board.markSquareContaining(number) }
+        val winningBoards = input.boards.filter { it.isComplete }
+        if (winningBoards.size == input.boards.size) {
+            val remainder = winningBoards.toMutableList()
+            remainder.removeAll(previouslySolvedBoards)
+            val finalBoard = remainder.first()
+            return  finalBoard.sumOfUnmarkedValues() * number
+        }
+        previouslySolvedBoards = winningBoards
+    }
     return -1
 }
 
