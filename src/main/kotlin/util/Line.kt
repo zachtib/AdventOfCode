@@ -14,6 +14,12 @@ val Line.y1: Int
 val Line.y2: Int
     get() = to.y
 
+val Line.isHorizontal: Boolean
+    get() = y1 == y2
+
+val Line.isVertical: Boolean
+    get() = x1 == x2
+
 infix fun Point.lineTo(other: Point): Line {
     return Line(this, other)
 }

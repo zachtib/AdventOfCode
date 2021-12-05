@@ -4,7 +4,7 @@ import kotlin.test.assertEquals
 
 class Day5Tests {
 
-    val sampleInput = resource {
+    private val sampleInput = resource {
         """
             0,9 -> 5,9
             8,0 -> 0,8
@@ -49,8 +49,23 @@ class Day5Tests {
     }
 
     @Test
-    fun testPart1Givens() {
+    fun testPointsAlongLine() {
+        val line = sampleInput.first()
+        val points = line.pointsAlong()
 
+        assertEquals(listOf(
+            Point(0, 9),
+            Point(1, 9),
+            Point(2, 9),
+            Point(3, 9),
+            Point(4, 9),
+            Point(5, 9),
+        ), points)
+    }
+
+    @Test
+    fun testPart1Givens() {
+        val actual = day5Part1(sampleInput)
     }
 
     @Test
