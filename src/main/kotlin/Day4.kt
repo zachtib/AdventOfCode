@@ -9,13 +9,6 @@ data class BingoSquare(val value: Int, var isMarked: Boolean = false)
 
 class BingoBoard(private val boardState: List<List<BingoSquare>>) {
 
-    constructor(boardString: String) : this(boardString.lines()
-        .map { line ->
-            line.split(" ")
-                .filter { it.isNotBlank() }
-                .map { BingoSquare(it.toInt()) }
-        })
-
     private val rowCount: Int
         get() = boardState.size
 
@@ -60,7 +53,13 @@ class BingoBoard(private val boardState: List<List<BingoSquare>>) {
     }
 }
 
-fun String.toBingoBoard(): BingoBoard = BingoBoard(this)
+fun String.toBingoBoard(): BingoBoard {
+    val bingoSquares = lines().map { line ->
+        line.toListOfInts(separator = " ")
+            .map { BingoSquare(it) }
+    }
+    return BingoBoard(bingoSquares)
+}
 
 fun day4Part1(input: BingoBoardsWithInputs): Int {
     for (number in input.inputs) {
