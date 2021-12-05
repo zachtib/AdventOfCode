@@ -20,6 +20,19 @@ val Line.isHorizontal: Boolean
 val Line.isVertical: Boolean
     get() = x1 == x2
 
+val Line.dx: Int
+    get() = x2 - x1
+
+val Line.dy: Int
+    get() = y2 - y1
+
+val Line.isDiagonal: Boolean
+    get() {
+        val dx = dx
+        val dy = dy
+        return (dx == dy) || (dx == -dy)
+    }
+
 infix fun Point.lineTo(other: Point): Line {
     return Line(this, other)
 }

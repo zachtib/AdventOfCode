@@ -1,6 +1,8 @@
 import util.*
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class Day5Tests {
 
@@ -64,6 +66,70 @@ class Day5Tests {
     }
 
     @Test
+    fun testPointsAlongDiagonal1() {
+        val line = "1,1 -> 3,3".toLine()
+        assertContentEquals(listOf(
+            Point(1, 1),
+            Point(2, 2),
+            Point(3, 3),
+        ), line.pointsAlong())
+    }
+
+    @Test
+    fun testPointsAlongDiagonal2() {
+        val line = "9,7 -> 7,9".toLine()
+        assertContentEquals(listOf(
+            Point(9, 7),
+            Point(8, 8),
+            Point(7, 9),
+        ), line.pointsAlong())
+    }
+
+    @Test
+    fun testOtherDiagonadayl() {
+        val line = "6,4 -> 2,0".toLine()
+        assertTrue(line.isDiagonal)
+    }
+
+    @Test
+    fun testDiagonal() {
+        val line = "0,0 -> 8,8".toLine()
+        assertTrue(line.isDiagonal)
+
+        val points = line.pointsAlong()
+        assertContentEquals(listOf(
+            Point(0, 0),
+            Point(1, 1),
+            Point(2, 2),
+            Point(3, 3),
+            Point(4, 4),
+            Point(5, 5),
+            Point(6, 6),
+            Point(7, 7),
+            Point(8, 8),
+        ), points)
+    }
+
+    @Test
+    fun testReverseDiagonal() {
+        val line = "8,0 -> 0,8".toLine()
+        assertTrue(line.isDiagonal)
+
+        val points = line.pointsAlong()
+        assertContentEquals(listOf(
+            Point(8, 0),
+            Point(7, 1),
+            Point(6, 2),
+            Point(5, 3),
+            Point(4, 4),
+            Point(3, 5),
+            Point(2, 6),
+            Point(1, 7),
+            Point(0, 8),
+        ), points)
+    }
+
+    @Test
     fun testPart1Givens() {
         val actual = day5Part1(sampleInput)
         assertEquals(5, actual)
@@ -71,6 +137,7 @@ class Day5Tests {
 
     @Test
     fun testPart2Givens() {
-
+        val actual = day5Part2(sampleInput)
+        assertEquals(12, actual)
     }
 }
