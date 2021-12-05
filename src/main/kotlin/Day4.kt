@@ -7,13 +7,14 @@ data class BingoBoardsWithInputs(
 
 data class BingoSquare(val value: Int, var isMarked: Boolean = false)
 
-class BingoBoard(boardString: String) {
-    private val boardState = boardString.lines()
+class BingoBoard(private val boardState: List<List<BingoSquare>>) {
+
+    constructor(boardString: String) : this(boardString.lines()
         .map { line ->
             line.split(" ")
                 .filter { it.isNotBlank() }
                 .map { BingoSquare(it.toInt()) }
-        }
+        })
 
     private val rowCount: Int
         get() = boardState.size
