@@ -8,17 +8,12 @@ data class BingoBoardsWithInputs(
 data class BingoSquare(val value: Int, var isMarked: Boolean = false)
 
 class BingoBoard(boardString: String) {
-    private val boardState: List<List<BingoSquare>>
-
-    init {
-        val lines = boardString.lines()
-        boardState = buildList {
-            for (line in lines) {
-                val tokens = line.split(" ").filter { it.isNotBlank() }
-                add(tokens.map { BingoSquare(it.toInt()) })
-            }
+    private val boardState = boardString.lines()
+        .map { line ->
+            line.split(" ")
+                .filter { it.isNotBlank() }
+                .map { BingoSquare(it.toInt()) }
         }
-    }
 
     private val rowCount: Int
         get() = boardState.size
@@ -87,20 +82,22 @@ fun day4Part2(input: BingoBoardsWithInputs): Int {
             val remainder = winningBoards.toMutableList()
             remainder.removeAll(previouslySolvedBoards)
             val finalBoard = remainder.first()
-            return  finalBoard.sumOfUnmarkedValues() * number
+            return finalBoard.sumOfUnmarkedValues() * number
         }
         previouslySolvedBoards = winningBoards
     }
     return -1
 }
 
+fun Resource.asBingoBoardWithInputs() = asComplexType {
+    BingoBoardsWithInputs(
+        inputs = takeOne { it.toListOfInts() },
+        boards = takeRemaining { it.toBingoBoard() },
+    )
+}
+
 fun main() {
-    val input = resource("day4.txt").asComplexType {
-        BingoBoardsWithInputs(
-            inputs = takeOne { it.toListOfInts() },
-            boards = takeRemaining { it.toBingoBoard() },
-        )
-    }
+    val input = resource("day4.txt").asBingoBoardWithInputs()
     day4Part1(input.copy()).part1Result()
     day4Part2(input.copy()).part2Result()
 }
