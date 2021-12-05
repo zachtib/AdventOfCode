@@ -42,7 +42,7 @@ private class ComplexTypeBuilder(
     items: List<String>
 ) : ComplexTypeBuilderScope {
 
-    private var lines = items.toMutableList()
+    private var lines = items.filter { it.isNotEmpty() }.toMutableList()
 
     override fun <T> takeOne(transform: (String) -> T): T {
         return transform(lines.removeFirst())

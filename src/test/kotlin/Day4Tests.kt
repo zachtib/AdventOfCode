@@ -44,7 +44,7 @@ class Day4Tests {
     @Test
     fun testPart1() {
         val actual = day4Part1(sampleInput)
-        assertEquals(0, actual)
+        assertEquals(4512, actual)
     }
 
     @Test
