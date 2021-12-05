@@ -66,6 +66,7 @@ class Day5Tests {
     @Test
     fun testPart1Givens() {
         val actual = day5Part1(sampleInput)
+        assertEquals(5, actual)
     }
 
     @Test

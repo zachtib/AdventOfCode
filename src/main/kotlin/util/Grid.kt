@@ -5,6 +5,7 @@ interface Grid<T> {
     val columnCount: Int
     val rows: List<List<T>>
     val columns: List<List<T>>
+    val items: Collection<T>
 
     operator fun get(row: Int, column: Int): T
 }
@@ -20,24 +21,24 @@ class ListGrid<T>(
 ) : MutableGrid<T> {
 
     override val rows: List<List<T>>
-        get() = data.windowed(columnCount)
+        get() = data.windowed(columnCount, step = columnCount)
 
     override val columns: List<List<T>>
         get() = (0 until columnCount).map { index -> rows.map { it[index] } }
 
-    val items: List<T>
+    override val items: Collection<T>
         get() = data.toList()
 
     override operator fun get(row: Int, column: Int): T {
         if (row !in 0 until rowCount || column !in 0 until columnCount) {
-            throw ArrayIndexOutOfBoundsException()
+            throw IndexOutOfBoundsException()
         }
         return data[row * columnCount + column]
     }
 
     override operator fun set(row: Int, column: Int, value: T) {
         if (row !in 0 until rowCount || column !in 0 until columnCount) {
-            throw ArrayIndexOutOfBoundsException()
+            throw IndexOutOfBoundsException()
         }
         data[row * columnCount + column] = value
     }
@@ -54,5 +55,5 @@ fun <T> gridBuilder(rows: Int, columns: Int, builder: (row: Int, column: Int) ->
 }
 
 fun <T> mutableGridOf(rows: Int, columns: Int, default: T): MutableGrid<T> {
-    return ListGrid(rows, columns, ArrayList(rows * columns))
+    return ListGrid(rows, columns, MutableList(rows * columns) { default } )
 }
