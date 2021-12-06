@@ -1,3 +1,6 @@
+import res.Resource
+import res.asComplexType
+import res.load
 import util.*
 
 data class BingoBoardsWithInputs(
@@ -97,7 +100,7 @@ fun Resource.asBingoBoardWithInputs() = asComplexType {
 }
 
 fun main() {
-    val input = resource("day4.txt").asBingoBoardWithInputs()
+    val input = load("day4.txt").asBingoBoardWithInputs()
     day4Part1(input.copy()).part1Result()
     day4Part2(input.copy()).part2Result()
 }

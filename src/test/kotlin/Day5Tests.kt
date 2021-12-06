@@ -1,3 +1,5 @@
+import res.asType
+import res.resourceOf
 import util.*
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
@@ -6,7 +8,7 @@ import kotlin.test.assertTrue
 
 class Day5Tests {
 
-    private val sampleInput = resource {
+    private val sampleInput = resourceOf(
         """
             0,9 -> 5,9
             8,0 -> 0,8
@@ -19,7 +21,7 @@ class Day5Tests {
             0,0 -> 8,8
             5,5 -> 8,2
         """.trimIndent()
-    }.asType { it.toLine() }
+    ).asType { it.toLine() }
 
     @Test
     fun testPointAndLineInit() {

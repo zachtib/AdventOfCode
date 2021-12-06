@@ -1,11 +1,10 @@
-import util.asInts
-import util.resource
+import res.asInts
+import res.resourceOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Day1Tests {
-    private val sampleInput = resource {
-        """
+    private val sampleInput = resourceOf("""
         199
         200
         208
@@ -16,8 +15,7 @@ class Day1Tests {
         269
         260
         263
-        """.trimIndent()
-    }.asInts()
+    """.trimIndent()).asInts()
 
     @Test
     fun testGivens() {

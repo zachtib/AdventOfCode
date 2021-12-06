@@ -1,3 +1,5 @@
+import res.asType
+import res.load
 import util.*
 
 
@@ -53,7 +55,7 @@ fun day5Part2(lines: List<Line>): Int {
 }
 
 fun main() {
-    val input = resource("day5.txt").asType { it.toLine() }
+    val input = load("day5.txt").asType { it.toLine() }
 
     day5Part1(input).part1Result()
     day5Part2(input).part2Result()

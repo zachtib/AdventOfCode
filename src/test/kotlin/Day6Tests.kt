@@ -1,13 +1,12 @@
-import util.asType
-import util.resource
+import res.asType
+import res.resourceOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Day6Tests {
 
-    private val sampleInput = resource(",") {
-        "3,4,3,1,2"
-    }.asType { LanternFish(it.toInt()) }
+    private val sampleInput = resourceOf("3,4,3,1,2", ",")
+        .asType { LanternFish(it.toInt()) }
 
     @Test
     fun testPart1Givens() {

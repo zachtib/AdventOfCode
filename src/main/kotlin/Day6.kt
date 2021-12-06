@@ -1,7 +1,7 @@
-import util.asType
+import res.asType
+import res.load
 import util.part1Result
 import util.part2Result
-import util.resource
 
 data class LanternFish(var daysRemaining: Int = DAYS_FOR_INITIAL_CYCLE) {
     companion object {
@@ -112,7 +112,7 @@ fun day6Part2(input: List<LanternFish>): Long {
 }
 
 fun main() {
-    val input = resource("day6.txt", ",").asType { LanternFish(it.toInt()) }
+    val input = load("day6.txt", ",").asType { LanternFish(it.toInt()) }
 
     day6Part1(input).part1Result()
     day6Part2(input).part2Result()

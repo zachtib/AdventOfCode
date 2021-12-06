@@ -1,25 +1,25 @@
-import util.asStrings
-import util.resource
+import res.asStrings
+import res.resourceOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Day3Tests {
-    private val input = resource {
+    private val input = resourceOf(
         """
-        00100
-        11110
-        10110
-        10111
-        10101
-        01111
-        00111
-        11100
-        10000
-        11001
-        00010
-        01010
+            00100
+            11110
+            10110
+            10111
+            10101
+            01111
+            00111
+            11100
+            10000
+            11001
+            00010
+            01010
         """.trimIndent()
-    }.asStrings()
+    ).asStrings()
 
     @Test
     fun testPart1Givens() {

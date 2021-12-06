@@ -1,7 +1,7 @@
-import util.asType
+import res.asType
+import res.load
 import util.part1Result
 import util.part2Result
-import util.resource
 
 enum class SubmarineDirection {
     FORWARD,
@@ -71,7 +71,7 @@ fun day2Part2(input: List<SubmarineCommand>): Int {
 }
 
 fun main() {
-    val input = resource("day2.txt").asType { it.toSubmarineCommand() }
+    val input = load("day2.txt").asType { it.toSubmarineCommand() }
     day2Part1(input).part1Result()
     day2Part2(input).part2Result()
 }

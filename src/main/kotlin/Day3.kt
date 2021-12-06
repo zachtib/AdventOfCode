@@ -1,3 +1,5 @@
+import res.asStrings
+import res.load
 import util.*
 
 
@@ -72,7 +74,7 @@ fun day3Part2(input: List<String>): Int {
 }
 
 fun main() {
-    val input = resource("day3.txt").asStrings()
+    val input = load("day3.txt").asStrings()
     day3Part1(input).part1Result()
     day3Part2(input).part2Result()
 }
