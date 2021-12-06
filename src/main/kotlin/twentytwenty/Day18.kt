@@ -1,5 +1,6 @@
 package twentytwenty
 
+import res.load
 import util.part1Result
 import util.part2Result
 
@@ -82,8 +83,8 @@ fun evaluate(expression: String, advanced: Boolean = false): Long {
 }
 
 fun main() {
-    val input = Resources.getLines("day18.txt")
+    val input = load("2020/day18.txt").items
 
-    input.map { evaluate(it) }.sum().part1Result()
-    input.map { evaluate(it, true) }.sum().part2Result()
+    input.sumOf { evaluate(it) }.part1Result()
+    input.sumOf { evaluate(it, true) }.part2Result()
 }

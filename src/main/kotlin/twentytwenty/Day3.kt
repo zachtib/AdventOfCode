@@ -1,5 +1,7 @@
 package twentytwenty
 
+import res.asStrings
+import res.load
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
@@ -53,7 +55,7 @@ class TreeField(private val rows: List<String>) {
 
 
 fun main() {
-    val field = TreeField(Resources.getLines("day3.txt"))
+    val field = TreeField(load("2020/day3.txt").asStrings())
     println("Part 1: ${field.traverse(Slope(3, 1))}")
 
     val part2result = field.multiTraverse(listOf(

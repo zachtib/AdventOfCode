@@ -1,5 +1,6 @@
 package twentytwenty
 
+import res.load
 import util.part1Result
 import util.part2Result
 
@@ -94,7 +95,7 @@ fun solveMyTicket(rules: List<Rule>, myTicket: List<Int>, validTickets: List<Lis
 }
 
 fun main() {
-    val input = parseInput(Resources.getText("day16.txt") ?: "")
+    val input = parseInput(load("2020/day16.txt").body)
 
     calculateScanningErrorRate(input.rules, input.otherTickets).part1Result()
 

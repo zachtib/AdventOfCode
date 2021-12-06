@@ -1,5 +1,8 @@
 package twentytwenty
 
+import res.asType
+import res.load
+
 fun IntRange.takeFront(): IntRange {
     val pivot: Int = (last - first) / 2 + first
     return first..pivot
@@ -41,11 +44,11 @@ fun calculateSeat(ticket: CharSequence): Int {
 
 
 fun main() {
-    val input = Resources.getLines("day5.txt")
-    val maxSeatId = input.map(::calculateSeat).maxOrNull() ?: throw IllegalStateException("List was empty!")
+    val seats = load("2020/day5.txt").asType { calculateSeat(it) }
+    val maxSeatId = seats.maxOrNull() ?: throw IllegalStateException("List was empty!")
     println("Max seat id is $maxSeatId")
 
-    val allSeats = input.map(::calculateSeat).sorted()
+    val allSeats = seats.sorted()
     for (window in allSeats.windowed(size = 2, step = 1)) {
         if (window[1] == window[0] + 2) {
             println("There is a missing seat between ${window[0]} and ${window[1]}")

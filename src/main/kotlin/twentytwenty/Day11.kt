@@ -1,5 +1,6 @@
 package twentytwenty
 
+import res.load
 import twentytwenty.util.as2dArray
 
 sealed class Tile {
@@ -207,7 +208,7 @@ class Layout(private val array: Array<Array<Tile>>) {
 
 
 fun main() {
-    val input = Resources.getText("day11.txt") ?: return
+    val input = load("day11.txt").body
     val waitingRoom = Layout(input)
 
     // Part 1

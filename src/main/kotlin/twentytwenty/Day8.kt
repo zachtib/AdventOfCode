@@ -1,5 +1,8 @@
 package twentytwenty
 
+import res.asType
+import res.load
+
 sealed class Instruction {
     data class Acc(val value: Int) : Instruction()
     data class Jmp(val offset: Int): Instruction()
@@ -83,7 +86,7 @@ fun repairProgram(program: List<Instruction>): Int {
 
 fun main() {
     val computer = Computer()
-    val program = Resources.load("day8.txt") { Instruction.parse(it) }
+    val program = load("day8.txt").asType { Instruction.parse(it) }
     val part1Result = computer.runUntilLoopDetected(program)
     println("Part 1 result: $part1Result")
 

@@ -1,5 +1,8 @@
 package twentytwenty
 
+import res.asInts
+import res.asType
+import res.load
 import kotlin.math.abs
 
 enum class Direction {
@@ -161,7 +164,7 @@ class WaypointShip : Ship() {
 }
 
 fun main() {
-    val movement = Resources.load("day12.txt") { it.toMovement() }
+    val movement = load("day12.txt").asType { it.toMovement() }
     val ship = SimpleShip()
     for (move in movement) {
         ship.move(move)

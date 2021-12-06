@@ -1,5 +1,7 @@
 package twentytwenty
 
+import res.asInts
+import res.load
 import kotlin.Triple
 
 fun List<Int>.getPairsSummingTo(sum: Int): List<Pair<Int, Int>> {
@@ -47,7 +49,7 @@ fun getTriplesProduct(input: List<Int>): Int {
 }
 
 fun main() {
-    val input = Resources.getInts("day1.txt")
+    val input = load("2020/day1.txt").asInts()
     println("Part 1 result: ${getPairsProduct(input)}")
     println("Part 2 result: ${getTriplesProduct(input)}")
 }

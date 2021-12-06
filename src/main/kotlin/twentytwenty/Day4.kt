@@ -1,5 +1,8 @@
 package twentytwenty
 
+import res.asType
+import res.load
+
 data class Passport(
     var byr: String? = null,
     var iyr: String? = null,
@@ -71,8 +74,7 @@ fun loadPassports(data: String): List<Passport> {
 }
 
 fun main() {
-    val data = Resources.getText("day4.txt") ?: throw IllegalStateException("day4.txt is missing")
-    val passports = loadPassports(data)
+    val passports = load("2020/day4.txt", "\n\n").asType { parsePassport(it) }
 
     val validCount = passports.count { it.isValid }
     println("Part 1 contains $validCount valid passports")

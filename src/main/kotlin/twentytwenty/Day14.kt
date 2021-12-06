@@ -1,5 +1,7 @@
 package twentytwenty
 
+import res.asType
+import res.load
 import util.part1Result
 import util.part2Result
 import kotlin.math.pow
@@ -162,7 +164,7 @@ class BitmaskComputerV2 {
 
 }
 fun main() {
-    val program = Resources.load("day14.txt") { BitmaskInstruction.fromString(it) }
+    val program = load("2020/day14.txt").asType { BitmaskInstruction.fromString(it) }
     val computer = BitmaskComputer()
     computer.execute(program)
 

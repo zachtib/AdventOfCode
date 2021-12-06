@@ -1,5 +1,7 @@
 package twentytwenty
 
+import res.load
+
 sealed class Bus {
     data class InService(val id: Int) : Bus()
     object OutOfService : Bus()
@@ -86,7 +88,7 @@ fun findTimeStampForBuses(buses: List<Bus>): Long {
 }
 
 fun main() {
-    val input = Resources.getText("day13.txt") ?: return
+    val input = load("2020/day13.txt").body
     val (timestamp, buses) = parseInputAssumingOutOfServiceBuses(input)
 
     println("Part 1 Result: ${findEarliestBusTimeWait(timestamp, buses)}")

@@ -1,5 +1,8 @@
 package twentytwenty
 
+import res.asType
+import res.load
+
 data class BagColor(val color: String)
 
 data class BagAmount(val amount: Int, val color: BagColor)
@@ -49,7 +52,7 @@ fun collectColors(rules: List<BagRule>): Set<BagColor> {
 
 fun main() {
     val myBag = BagColor("shiny gold")
-    val rules = Resources.load("day7.txt", ::parseBagRule)
+    val rules = load("2020/day7.txt").asType { parseBagRule(it) }
     val part1Solution = whatCanHold(rules, myBag)
     println("Part 1 solution: ${part1Solution.size}")
     val part2Solution = numberOfBagsInside(rules, myBag)

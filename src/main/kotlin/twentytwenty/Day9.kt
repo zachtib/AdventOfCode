@@ -1,5 +1,9 @@
 package twentytwenty
 
+import res.asInts
+import res.asLongs
+import res.load
+
 class SlidingList<T>(
         private val maxSize: Int,
         private val list: MutableList<T> = mutableListOf()
@@ -85,7 +89,7 @@ class XmasDecoder(private val preambleLength: Int, private val input: List<Long>
 }
 
 fun main() {
-    val input = Resources.getLongs("day9.txt")
+    val input = load("2020/day9.txt").asLongs()
     val decoder = XmasDecoder(25, input)
 
     val part1Result = decoder.findFirstInvalidElement()

@@ -1,5 +1,8 @@
 package twentytwenty
 
+import res.asInts
+import res.load
+
 data class JoltageDistribution(
         var ones: Int = 0,
         var twos: Int = 0,
@@ -109,7 +112,7 @@ fun countJoltageArrangements(joltages: List<Int>): Long {
 }
 
 fun main() {
-    val joltages = Resources.getInts("day10.txt")
+    val joltages = load("day10.txt").asInts()
     val distribution = findJoltageDistribution(joltages)
     val part1Result = distribution.ones * distribution.threes
     println("Part 1 Result: $part1Result")

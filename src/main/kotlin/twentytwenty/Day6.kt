@@ -1,5 +1,7 @@
 package twentytwenty
 
+import res.load
+
 fun calculateGroupSum(input: String): Int {
     val groups = input.split("\n\n")
     var count = 0
@@ -32,7 +34,7 @@ fun calculateGroupSumPart2(input: String): Int {
 }
 
 fun main() {
-    val input = Resources.getText("day6.txt") ?: return
+    val input = load("2020/day6.txt").body
 
     val part1Result = calculateGroupSum(input)
     println("Part 1 result: $part1Result")
