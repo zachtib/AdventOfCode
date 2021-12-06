@@ -4,32 +4,34 @@ import java.io.FileNotFoundException
 import java.net.URL
 
 
+class ResourceNotFound(filename: String) : FileNotFoundException("Requested resource, $filename, was not present")
+
 private object ResourceLoader {
-    fun load(name: String): URL? = javaClass.classLoader.getResource(name)
+    fun load(name: String): URL = javaClass.classLoader.getResource(name) ?: throw ResourceNotFound(name)
 }
 
-class Resource(val body: String, private val separator: String = "\n") {
-
-    constructor(url: URL, separator: String = "\n") : this(url.readText(), separator)
-
-    val lines: List<String>
-        get() = body.split(separator)
-            .filter { it.isNotBlank() }
+class Resource(val body: String, val delimiters: Array<out String> = arrayOf("\n")) {
+    constructor(url: URL, delimiters: Array<out String> = arrayOf("\n")) : this(url.readText(), delimiters)
 }
 
-fun <T> Resource.asType(transform: (String) -> T): List<T> = lines.map(transform)
+fun Resource.asStrings(): List<String> {
+    return this.body.split(*delimiters)
+        .filter { it.isNotBlank() }
+}
 
-fun Resource.asStrings(): List<String> = lines
+fun <T> Resource.asType(transform: (String) -> T): List<T> {
+    return asStrings().map(transform)
+}
 
 fun Resource.asInts(): List<Int> = this.asType { it.toInt() }
 
-fun resource(name: String): Resource {
-    val url = ResourceLoader.load(name) ?: throw FileNotFoundException("Requested file, $name, not present in resources")
-    return Resource(url)
+fun resource(name: String, vararg delimiters: String = arrayOf("\n")): Resource {
+    val resourceUrl = ResourceLoader.load(name)
+    return Resource(resourceUrl, delimiters)
 }
 
-fun resource(getString: () -> String): Resource {
-    return Resource(getString())
+fun resource(vararg delimiters: String = arrayOf("\n"), getString: () -> String): Resource {
+    return Resource(getString(), delimiters)
 }
 
 interface ComplexTypeBuilderScope {
@@ -39,7 +41,7 @@ interface ComplexTypeBuilderScope {
 }
 
 private class ComplexTypeBuilder(
-    items: List<String>
+    items: List<String>,
 ) : ComplexTypeBuilderScope {
 
     private var lines = items.filter { it.isNotEmpty() }.toMutableList()
