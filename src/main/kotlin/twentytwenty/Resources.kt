@@ -2,7 +2,7 @@ package twentytwenty
 
 object Resources {
     fun getText(name: String): String? {
-        return javaClass.classLoader.getResource(name)?.readText()
+        return javaClass.classLoader.getResource("2020/$name")?.readText()
     }
 
     fun getLines(name: String): List<String> {
