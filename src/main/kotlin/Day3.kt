@@ -3,8 +3,6 @@ import res.load
 import util.*
 
 
-class EmptyCollectionException : RuntimeException()
-
 fun <T> List<T>.getElementCounts(): Map<T, Int> = buildMap {
     for (element in this@getElementCounts) {
         val elementCount = this.getOrDefault(element, 0) + 1
