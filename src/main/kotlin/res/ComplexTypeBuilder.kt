@@ -13,13 +13,13 @@ private class ComplexTypeBuilder(
     private var lines = items.filter { it.isNotEmpty() }.toMutableList()
 
     override fun <T> takeOne(transform: (String) -> T): T {
-        return transform(lines.removeFirst())
+        return transform(lines.removeFirst().trim())
     }
 
     override fun <T> take(count: Int, transform: (String) -> T): List<T> {
         return buildList {
             for (i in 0..count) {
-                add(transform(lines.removeFirst()))
+                add(takeOne(transform))
             }
         }
     }
