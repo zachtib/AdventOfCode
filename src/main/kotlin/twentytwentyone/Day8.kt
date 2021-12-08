@@ -9,27 +9,21 @@ import util.part2Result
 
 data class SevenSegmentNotes(val signalPatterns: List<String>, val outputValue: List<String>)
 
-fun Resource.asSevenSegmentNotes() = asComplexType("|") {
-    SevenSegmentNotes(
-        signalPatterns = takeOne { it.split(" ") },
-        outputValue = takeOne { it.split(" ") }
-    )
-}
-
 fun String.asSevenSegmentNotes(): SevenSegmentNotes {
     val (signals, outputs) = this.split(" | ", limit = 2)
         .map { it.split(" ") }
     return SevenSegmentNotes(signals, outputs)
 }
 
-class SevenSegmentDisplay(inputString: String) {
-    companion object {
-
-    }
-}
+private const val ONE_COUNT = 2
+private const val FOUR_COUNT = 4
+private const val SEVEN_COUNT = 3
+private const val EIGHT_COUNT = 7
 
 fun day8Part1(notes: List<SevenSegmentNotes>): Int {
-    throw NotImplementedError()
+    val allOutputValues = notes.flatMap { it.outputValue }
+    val targetValues = listOf(ONE_COUNT, FOUR_COUNT, SEVEN_COUNT, EIGHT_COUNT)
+    return allOutputValues.count { it.length in targetValues }
 }
 
 fun day8Part2() {

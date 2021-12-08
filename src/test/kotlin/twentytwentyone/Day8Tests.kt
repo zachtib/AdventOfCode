@@ -1,6 +1,5 @@
 package twentytwentyone
 
-import res.asComplexType
 import res.asType
 import res.resourceOf
 import kotlin.test.Test
@@ -8,11 +7,9 @@ import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
 class Day8Tests {
-    private val sampleInput = resourceOf(
-        "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"
-    ).asComplexType { takeOne { it.asSevenSegmentNotes() } }
+    private val sampleNote = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"
 
-    private val secondInput = resourceOf(
+    private val sampleInput = resourceOf(
         """
             be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
             edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc
@@ -29,6 +26,8 @@ class Day8Tests {
 
     @Test
     fun `test input parsing`() {
+        val actual = sampleNote.asSevenSegmentNotes()
+
         assertContentEquals(listOf(
             "acedgfb",
             "cdfbe",
@@ -40,18 +39,18 @@ class Day8Tests {
             "eafb",
             "cagedb",
             "ab",
-        ), sampleInput.signalPatterns)
+        ), actual.signalPatterns)
         assertContentEquals(listOf(
             "cdfeb",
             "fcadb",
             "cdfeb",
             "cdbaf",
-        ), sampleInput.outputValue)
+        ), actual.outputValue)
     }
 
     @Test
     fun `test part 1 example`() {
-        val actual = day8Part1(secondInput)
+        val actual = day8Part1(sampleInput)
         assertEquals(26, actual)
     }
 
