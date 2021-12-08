@@ -55,7 +55,14 @@ class Day8Tests {
     }
 
     @Test
+    fun `test part 2 short example`() {
+        val notes = sampleNote.asSevenSegmentNotes()
+        val actual = solveSevenSegments(notes)
+        assertEquals(5353, actual)
+    }
+
+    @Test
     fun `test part 2 example`() {
-        val actual = day8Part2()
+        val actual = day8Part2(sampleInput)
     }
 }
