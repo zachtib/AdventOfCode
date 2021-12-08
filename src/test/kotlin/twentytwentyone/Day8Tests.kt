@@ -64,5 +64,6 @@ class Day8Tests {
     @Test
     fun `test part 2 example`() {
         val actual = day8Part2(sampleInput)
+        assertEquals(61229, actual)
     }
 }
