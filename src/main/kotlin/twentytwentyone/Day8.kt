@@ -15,6 +15,7 @@ fun String.asSevenSegmentNotes(): SevenSegmentNotes {
     return SevenSegmentNotes(signals, outputs)
 }
 
+private const val ZEROSIXNINE_COUNT = 6
 private const val ONE_COUNT = 2
 private const val TWOTHREEFIVE_COUNT = 5
 private const val FOUR_COUNT = 4
@@ -99,6 +100,43 @@ class SegmentDecoder(
             }
         }
     }
+}
+
+fun solveWithSets(notes: SevenSegmentNotes): Int {
+    val one = notes.signalPatterns.first { it.length == ONE_COUNT }.toSet()
+    val four = notes.signalPatterns.first { it.length == FOUR_COUNT}.toSet()
+    val seven = notes.signalPatterns.first { it.length == SEVEN_COUNT }.toSet()
+    val eight = notes.signalPatterns.first { it.length == EIGHT_COUNT }.toSet()
+
+    val zeroSixNine = notes.signalPatterns.filter { it.length == ZEROSIXNINE_COUNT }.map { it.toSet() }
+    val six = zeroSixNine.first { !it.containsAll(one) }
+
+    val twoThreeFive = notes.signalPatterns.filter { it.length == TWOTHREEFIVE_COUNT }.map { it.toSet() }
+    val three = twoThreeFive.first { it.containsAll(one) }
+    val five = twoThreeFive.first { six.containsAll(it) }
+    val two = twoThreeFive.first { it != three && it != five }
+
+    val nine = zeroSixNine.first { it.containsAll(three) }
+    val zero = zeroSixNine.first { it != six && it != nine }
+
+    val mapping = mapOf(
+        zero to 0,
+        one to 1,
+        two to 2,
+        three to 3,
+        four to 4,
+        five to 5,
+        six to 6,
+        seven to 7,
+        eight to 8,
+        nine to 9,
+    )
+
+    var acc = 0
+    for (string in notes.outputValue) {
+        acc = acc * 10 + mapping[string.toSet()]!!
+    }
+    return acc
 }
 
 fun solveSevenSegments(notes: SevenSegmentNotes): Int {

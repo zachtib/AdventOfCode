@@ -2,9 +2,11 @@ package twentytwentyone
 
 import res.asType
 import res.resourceOf
+import kotlin.system.measureTimeMillis
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class Day8Tests {
     private val sampleNote = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"
@@ -65,5 +67,40 @@ class Day8Tests {
     fun `test part 2 example`() {
         val actual = day8Part2(sampleInput)
         assertEquals(61229, actual)
+    }
+
+    @Test
+    fun `test part 2 take 2 short example`() {
+        val notes = sampleNote.asSevenSegmentNotes()
+        val actual = solveWithSets(notes)
+        assertEquals(5353, actual)
+    }
+
+    @Test
+    fun `test part 2 take 2 example`() {
+        val actual = sampleInput.sumOf { solveWithSets(it) }
+        assertEquals(61229, actual)
+    }
+
+    @Test
+    fun `compare execution times of two solutions`() {
+        val iterations = 1..1000
+
+        val initialSolutionTime = measureTimeMillis {
+            for (i in iterations) {
+                sampleInput.sumOf { solveSevenSegments(it) }
+            }
+        }
+
+        val revisedSolutionTime = measureTimeMillis {
+            for (i in iterations) {
+                sampleInput.sumOf { solveWithSets(it) }
+            }
+        }
+
+        println("For ${iterations.last} total iterations:")
+        println("Initial solution completed in $initialSolutionTime ms")
+        println("Revised solution completed in $revisedSolutionTime ms")
+        assertTrue(initialSolutionTime > revisedSolutionTime)
     }
 }
