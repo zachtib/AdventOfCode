@@ -1,7 +1,5 @@
 package twentytwentyone
 
-import res.Resource
-import res.asComplexType
 import res.asType
 import res.load
 import util.part1Result
