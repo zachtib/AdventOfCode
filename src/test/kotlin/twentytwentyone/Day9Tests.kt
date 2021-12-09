@@ -31,8 +31,15 @@ class Day9Tests {
     }
 
     @Test
+    fun `test generating basin`() {
+        val basin = sampleInput.calculateBasinFromLowPoint(0 to 1)
+
+        assertEquals(setOf(0 to 0, 0 to 1, 1 to 0), basin)
+    }
+
+    @Test
     fun `test part 2 sample`() {
-        val actual = day9Part2()
-        assertEquals(0, actual)
+        val actual = day9Part2(sampleInput)
+        assertEquals(1134, actual)
     }
 }
