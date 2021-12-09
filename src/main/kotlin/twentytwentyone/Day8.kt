@@ -2,10 +2,7 @@ package twentytwentyone
 
 import res.asType
 import res.load
-import util.requireOnlyOne
-import util.part1Result
-import util.part2Result
-import util.requireSize
+import util.*
 
 data class SevenSegmentNotes(val signalPatterns: List<String>, val outputValue: List<String>)
 
@@ -103,20 +100,30 @@ class SegmentDecoder(
 }
 
 fun solveWithSets(notes: SevenSegmentNotes): Int {
-    val one = notes.signalPatterns.first { it.length == ONE_COUNT }.toSet()
-    val four = notes.signalPatterns.first { it.length == FOUR_COUNT}.toSet()
-    val seven = notes.signalPatterns.first { it.length == SEVEN_COUNT }.toSet()
-    val eight = notes.signalPatterns.first { it.length == EIGHT_COUNT }.toSet()
+    val signalPatterns = notes.signalPatterns.map { it.toSet() }
 
-    val zeroSixNine = notes.signalPatterns.filter { it.length == ZEROSIXNINE_COUNT }.map { it.toSet() }
-    val six = zeroSixNine.first { !it.containsAll(one) }
+    // 1, 4, 7, and 8 each have a unique number of segments
+    val one = signalPatterns.first { it.size == ONE_COUNT }
+    val four = signalPatterns.first { it.size == FOUR_COUNT}
+    val seven = signalPatterns.first { it.size == SEVEN_COUNT }
+    val eight = signalPatterns.first { it.size == EIGHT_COUNT }
 
-    val twoThreeFive = notes.signalPatterns.filter { it.length == TWOTHREEFIVE_COUNT }.map { it.toSet() }
-    val three = twoThreeFive.first { it.containsAll(one) }
-    val five = twoThreeFive.first { six.containsAll(it) }
+    // 0, 6, and 9 each have 6 segments
+    val zeroSixNine = signalPatterns.filter { it.size == ZEROSIXNINE_COUNT }
+    // 2, 3, and 5 each have 5 segments
+    val twoThreeFive = signalPatterns.filter { it.size == TWOTHREEFIVE_COUNT }
+
+    // 6 is the only number of 0, 6, or 9 to not contain all segments in 1
+    val six = zeroSixNine.first { it isNotSupersetOf  one }
+    // 3 is the only number of 2, 3, or 5 to contain all segments in 1
+    val three = twoThreeFive.first { it isSupersetOf one }
+    // 5 is the only number of 2, 3, or 5 to have all its segments contained in 6
+    val five = twoThreeFive.first { it isSubsetOf six }
+    // 2 by process of elimination
     val two = twoThreeFive.first { it != three && it != five }
-
-    val nine = zeroSixNine.first { it.containsAll(three) }
+    // 9 is the only number of 0, 6, or 9 to contain all segments in 3
+    val nine = zeroSixNine.first { it isSupersetOf three }
+    // 0 by process of elimination
     val zero = zeroSixNine.first { it != six && it != nine }
 
     val mapping = mapOf(
