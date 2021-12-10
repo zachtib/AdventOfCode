@@ -1,6 +1,12 @@
 package util
 
-data class Point(val x: Int, val y: Int)
+typealias Point = Pair<Int, Int>
+
+val Point.x: Int
+    get() = first
+
+val Point.y: Int
+    get() = second
 
 fun String.toPoint(): Point {
     val (xString, yString) = this.split(",", limit = 2)

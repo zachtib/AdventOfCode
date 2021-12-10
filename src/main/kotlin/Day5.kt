@@ -23,15 +23,9 @@ fun Line.pointsAlong(): List<Point> {
     }
 }
 
-private fun printGrid(grid: Grid<Int>) {
-    for (col in grid.columns) {
-        println(col.joinToString("") { if (it == 0) "." else it.toString() })
-    }
-}
-
 private fun calculateGridForLines(lines: List<Line>): Int {
     val bounds = lines.bounds()
-    val grid = mutableGridOf(bounds.maxX + 1, bounds.maxY + 1, 0)
+    val grid = MutableGrid(bounds.maxX + 1, bounds.maxY + 1, 0)
 
     for (line in lines) {
         val pointsOnLine = line.pointsAlong()
