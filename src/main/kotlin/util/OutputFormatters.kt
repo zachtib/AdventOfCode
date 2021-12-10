@@ -23,6 +23,9 @@ fun <T : Any?> T.part2Result(): T = displayResult(2, this)
 private fun <T> performPart(partNumber: Int, calculate: () -> T): T? {
     return try {
         displayResult(partNumber, calculate())
+    } catch (e: NotImplementedError) {
+        printError("Part $partNumber is not yet implemented")
+        null
     } catch (e: Throwable) {
         displayError(partNumber, e)
     }
