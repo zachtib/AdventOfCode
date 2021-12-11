@@ -29,7 +29,7 @@ class Day11Tests {
 
     @Test
     fun `test part 2 givens`() {
-        val actual = day11Part2()
-        assertEquals(0, actual)
+        val actual = day11Part2(sampleInput)
+        assertEquals(195, actual)
     }
 }

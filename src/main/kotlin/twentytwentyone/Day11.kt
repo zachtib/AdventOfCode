@@ -74,15 +74,30 @@ fun Grid<BioluminescentOctopus>.step(): Int {
     return acc
 }
 
+fun Grid<BioluminescentOctopus>.atZero() : Boolean {
+    for (oct in this) {
+        if (oct.energyLevel > 0) {
+            return false
+        }
+    }
+    return true
+}
+
 fun day11Part1(input: Grid<Int>): Int {
     val octopuses = input.map { BioluminescentOctopus(it) }
-    // running one step
-
     return (1..100).sumOf { octopuses.step() }
 }
 
-fun day11Part2(): Int {
-    throw NotImplementedError()
+fun day11Part2(input: Grid<Int>): Int {
+    val octopuses = input.map { BioluminescentOctopus(it) }
+    var step = 1
+    while (true) {
+        octopuses.step()
+        if (octopuses.atZero()) {
+            return step
+        }
+        step++
+    }
 }
 
 fun main() {
@@ -91,6 +106,6 @@ fun main() {
         day11Part1(input)
     }
     part2 {
-        day11Part2()
+        day11Part2(input)
     }
 }
