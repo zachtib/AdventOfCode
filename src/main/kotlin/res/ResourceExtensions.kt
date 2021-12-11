@@ -1,5 +1,8 @@
 package res
 
+import util.ArrayGrid
+import util.Grid
+
 fun Resource.asStrings(): List<String> = items
 
 fun <T> Resource.asType(transform: (String) -> T) = items.map(transform)
@@ -16,4 +19,10 @@ inline fun <reified T> Resource.as2dArray(transform: (Char) -> T): Array<Array<T
             transform(row[columnIndex])
         }
     }
+}
+
+inline fun <reified T> Resource.asGrid(
+    transform: (Char) -> T
+): Grid<T> {
+    return ArrayGrid(as2dArray(transform))
 }

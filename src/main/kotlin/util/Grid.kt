@@ -9,9 +9,11 @@ interface Grid<T> {
     fun isEmpty(): Boolean
     fun contains(element: T): Boolean
     fun containsAll(elements: Collection<T>): Boolean
-    fun iterator(): Iterator<T>
+    operator fun iterator(): Iterator<T>
 
     val indices: Iterator<Point>
+    val rowIndices: IntRange
+    val columnIndices: IntRange
 
     operator fun get(row: Int, column: Int): T
 }
@@ -39,10 +41,11 @@ class EmptyGrid<T> : Grid<T> {
         throw IndexOutOfBoundsException("Empty list doesn't contain element at index ($row, $column).")
     }
 
-    override fun iterator(): Iterator<T> = EmptyIterator
+    override operator fun iterator(): Iterator<T> = EmptyIterator
 
     override val indices: Iterator<Point> get() = EmptyIterator
-
+    override val rowIndices: IntRange get() = IntRange.EMPTY
+    override val columnIndices: IntRange get() = IntRange.EMPTY
     override val rows: Int get() = 0
     override val columns: Int get() = 0
     override val items: Collection<Nothing> get() = emptyList()
@@ -77,7 +80,7 @@ class ArrayGrid<T>(private val array: Array<Array<T>>) : Grid<T>, MutableGrid<T>
 
     override fun isEmpty(): Boolean = rows != 0 && columns != 0
 
-    override fun iterator(): Iterator<T> = iterator {
+    override operator fun iterator(): Iterator<T> = iterator {
         for ((row, column) in indices) {
             yield(get(row, column))
         }
@@ -90,6 +93,9 @@ class ArrayGrid<T>(private val array: Array<Array<T>>) : Grid<T>, MutableGrid<T>
             }
         }
     }
+
+    override val rowIndices: IntRange get() = array.indices
+    override val columnIndices: IntRange get() = array.firstOrNull()?.indices ?: IntRange.EMPTY
 }
 
 @Suppress("FunctionName")
