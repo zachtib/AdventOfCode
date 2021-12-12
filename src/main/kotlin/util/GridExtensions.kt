@@ -15,7 +15,7 @@ fun <T> Grid<T>.forEach(func: (item: T) -> Unit) {
 fun <T> Grid<T>.forEachIndexed(
     func: (index: Point, item: T) -> Unit,
 ) = indices.forEach { index ->
-    func(index, this[index])
+    func(index, get(index))
 }
 
 fun <T> Grid<T>.filter(predicate: (T) -> Boolean) = iterator {

@@ -1,6 +1,6 @@
 package twentytwentyone
 
-import res.as2dArray
+import res.asGrid
 import res.resourceOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -13,15 +13,15 @@ class Day9Tests {
         9856789892
         8767896789
         9899965678
-    """.trimIndent()).as2dArray { it.digitToInt() }
+    """.trimIndent()).asGrid { it.digitToInt() }
 
     @Test
     fun `test 2dArray loading`() {
-        assertEquals(2, sampleInput[0][0])
-        assertEquals(3, sampleInput[1][0])
-        assertEquals(9, sampleInput[2][0])
-        assertEquals(8, sampleInput[2][1])
-        assertEquals(5, sampleInput[2][2])
+        assertEquals(2, sampleInput[0, 0])
+        assertEquals(3, sampleInput[1, 0])
+        assertEquals(9, sampleInput[2, 0])
+        assertEquals(8, sampleInput[2, 1])
+        assertEquals(5, sampleInput[2, 2])
     }
 
     @Test

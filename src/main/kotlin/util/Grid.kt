@@ -44,7 +44,7 @@ class ArrayGrid<T>(private val array: Array<Array<T>>) : MutableGrid<T> {
     override val rows: Int get() = array.size
     override val columns: Int get() = array.firstOrNull()?.size ?: 0
 
-    override fun isEmpty(): Boolean = rows != 0 || columns != 0
+    override fun isEmpty(): Boolean = rows == 0 || columns == 0
     override fun contains(element: T): Boolean = array.any { it.contains(element) }
     override fun containsAll(elements: Collection<T>): Boolean = elements.all { contains(it) }
 
