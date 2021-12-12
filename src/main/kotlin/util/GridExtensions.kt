@@ -1,9 +1,7 @@
 package util
 
-import twentytwentyone.pointsInGridAdjacentTo
-
 inline fun <T, reified R> Grid<T>.map(transform: (T) -> R): Grid<R> {
-    return buildGrid(rows, columns) { row, column ->
+    return Grid(rows, columns) { row, column ->
         transform(this[row, column])
     }
 }
@@ -55,4 +53,12 @@ fun <T> Grid<T>.pointsInGridAdjacentOrDiagonalTo(reference: Point): List<Point> 
     ).filter { (rowIndex, columnIndex) ->
         rowIndex in rowIndices && columnIndex in columnIndices
     }
+}
+
+fun <T> Grid<T>.count(predicate: (T) -> Boolean): Int {
+    var count = 0
+    for (element in this) {
+        if (predicate(element)) count++
+    }
+    return count
 }

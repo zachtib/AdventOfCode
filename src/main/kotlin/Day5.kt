@@ -35,7 +35,7 @@ private fun calculateGridForLines(lines: List<Line>): Int {
         }
     }
 
-    return grid.items.count { it >= 2 }
+    return grid.count { it >= 2 }
 }
 
 fun day5Part1(lines: List<Line>): Int {
