@@ -4,6 +4,7 @@ interface ComplexTypeBuilderScope {
     fun <T> takeOne(transform: (String) -> T): T
     fun <T> take(count: Int, transform: (String) -> T): List<T>
     fun <T> takeRemaining(transform: (String) -> T): List<T>
+    fun <T> takeLines(transform: (String) -> T): List<T>
 }
 
 private class ComplexTypeBuilder(
@@ -28,6 +29,10 @@ private class ComplexTypeBuilder(
         val result = lines.map(transform)
         lines.clear()
         return result
+    }
+
+    override fun <T> takeLines(transform: (String) -> T): List<T> {
+        return lines.removeFirst().lines().map(transform)
     }
 }
 

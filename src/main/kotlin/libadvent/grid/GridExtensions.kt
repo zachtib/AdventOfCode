@@ -64,3 +64,12 @@ fun <T> Grid<T>.count(predicate: (T) -> Boolean): Int {
     }
     return count
 }
+
+fun <T> Grid<T>.joinToString(transform: (T) -> CharSequence): String {
+    return columnIndices.joinToString(separator = "\n") { column ->
+        rowIndices.map { row -> this[row, column] }
+            .joinToString(separator = "") {
+                transform(it)
+            }
+    }
+}
