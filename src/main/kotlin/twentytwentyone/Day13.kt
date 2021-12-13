@@ -106,5 +106,5 @@ fun main() {
     val (points, folds) = load("2021/day13.txt").asTransparentOrigami()
 
     part1 { day13Part1(points, folds) }
-    part2 { "\n" + day13Part2(points, folds) }
+    part2(prependNewline = true) { day13Part2(points, folds) }
 }
