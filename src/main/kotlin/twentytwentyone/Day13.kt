@@ -27,8 +27,6 @@ fun String.asFold(): Fold {
     }
 }
 
-
-
 inline fun <reified T> Grid<T>.foldAlong(fold: Fold, combine: (first: T, second: T) -> T): Grid<T> {
     // Folding left will alter the Grid's columns, up will alter the rows
     return when (fold) {
