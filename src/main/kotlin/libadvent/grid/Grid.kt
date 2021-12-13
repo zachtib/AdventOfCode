@@ -1,4 +1,6 @@
-package util
+package libadvent.grid
+
+import libadvent.geometry.Point
 
 
 internal object EmptyIterator : ListIterator<Nothing> {

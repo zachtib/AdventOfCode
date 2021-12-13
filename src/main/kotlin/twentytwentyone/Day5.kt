@@ -1,5 +1,8 @@
 package twentytwentyone
 
+import libadvent.geometry.*
+import libadvent.grid.MutableGrid
+import libadvent.grid.count
 import res.asType
 import res.load
 import util.*

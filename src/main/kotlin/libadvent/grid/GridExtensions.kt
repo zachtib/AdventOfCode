@@ -1,4 +1,6 @@
-package util
+package libadvent.grid
+
+import libadvent.geometry.Point
 
 inline fun <T, reified R> Grid<T>.map(transform: (T) -> R): Grid<R> {
     return Grid(rows, columns) { row, column ->

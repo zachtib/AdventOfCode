@@ -1,7 +1,7 @@
 package res
 
-import util.ArrayGrid
-import util.Grid
+import libadvent.grid.ArrayGrid
+import libadvent.grid.Grid
 
 fun Resource.asStrings(): List<String> = items
 

@@ -1,5 +1,6 @@
 package util
 
+import libadvent.grid.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

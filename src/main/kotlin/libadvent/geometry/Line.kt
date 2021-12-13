@@ -1,4 +1,4 @@
-package util
+package libadvent.geometry
 
 data class Line(val from: Point, val to: Point)
 

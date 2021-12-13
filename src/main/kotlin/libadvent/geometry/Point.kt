@@ -1,4 +1,4 @@
-package util
+package libadvent.geometry
 
 typealias Point = Pair<Int, Int>
 

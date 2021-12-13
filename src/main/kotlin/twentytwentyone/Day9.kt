@@ -1,5 +1,7 @@
 package twentytwentyone
 
+import libadvent.geometry.Point
+import libadvent.grid.*
 import res.asGrid
 import res.load
 import util.*
