@@ -1,4 +1,4 @@
-package util
+package libadvent.util
 
 fun String.toBinaryInt(): Int = toInt(2)
 

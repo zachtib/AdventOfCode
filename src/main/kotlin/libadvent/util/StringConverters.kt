@@ -1,4 +1,4 @@
-package util
+package libadvent.util
 
 
 fun String.toListOfInts(separator: String = ","): List<Int> {

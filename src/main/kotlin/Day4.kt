@@ -1,3 +1,4 @@
+import libadvent.util.toListOfInts
 import res.Resource
 import res.asComplexType
 import res.load

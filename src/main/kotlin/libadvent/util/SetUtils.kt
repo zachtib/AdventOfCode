@@ -1,4 +1,4 @@
-package util
+package libadvent.util
 
 infix fun <T> Set<T>.isSubsetOf(other: Set<T>): Boolean {
     // Every element in *this* is present in *other*

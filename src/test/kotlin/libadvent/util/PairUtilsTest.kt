@@ -1,4 +1,4 @@
-package libadvent
+package libadvent.util
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

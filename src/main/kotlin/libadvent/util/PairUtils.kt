@@ -1,4 +1,4 @@
-package libadvent
+package libadvent.util
 
 fun <T> List<T>.toPair(): Pair<T, T> {
     if (size != 2) {

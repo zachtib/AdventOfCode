@@ -1,5 +1,6 @@
 package twentytwentyone
 
+import libadvent.util.isEven
 import res.asStrings
 import res.load
 import util.*

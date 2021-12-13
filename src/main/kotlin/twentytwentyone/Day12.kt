@@ -1,9 +1,9 @@
 package twentytwentyone
 
-import libadvent.allLowerCase
-import libadvent.allUpperCase
-import libadvent.itemsPairedWith
-import libadvent.toPair
+import libadvent.util.allLowerCase
+import libadvent.util.allUpperCase
+import libadvent.util.itemsPairedWith
+import libadvent.util.toPair
 import res.asType
 import res.load
 import util.part1

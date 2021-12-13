@@ -1,3 +1,4 @@
+import libadvent.util.toBinaryInt
 import res.asStrings
 import res.load
 import util.*

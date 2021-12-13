@@ -1,4 +1,4 @@
-package libadvent
+package libadvent.util
 
 
 fun String.allUpperCase(): Boolean = all { it.isUpperCase() }
