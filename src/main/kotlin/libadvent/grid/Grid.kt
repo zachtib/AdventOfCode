@@ -71,15 +71,25 @@ class ArrayGrid<T>(private val array: Array<Array<T>>) : MutableGrid<T> {
 
 val <T> Grid<T>.indices: List<Point>
     get() = buildList {
-        for (row in 0 until rows) {
-            for (column in 0 until columns) {
+        for (row in rowIndices) {
+            for (column in columnIndices) {
                 add(row to column)
             }
         }
     }
 
-val <T> Grid<T>.rowIndices: IntRange get() = 0 until rows
-val <T> Grid<T>.columnIndices: IntRange get() = 0 until columns
+val <T> Grid<T>.rowIndices: IntRange
+    get() = if (this is BoundedGrid) {
+        bounds.minX..bounds.maxX
+    } else {
+        0 until rows
+    }
+val <T> Grid<T>.columnIndices: IntRange
+    get() = if (this is BoundedGrid) {
+        bounds.minY..bounds.maxY
+    } else {
+        0 until columns
+    }
 val <T> Grid<T>.size: Int get() = rows * columns
 fun <T> Grid<T>.isNotEmpty(): Boolean = !isEmpty()
 
