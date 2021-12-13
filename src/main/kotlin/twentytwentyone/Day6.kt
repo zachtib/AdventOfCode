@@ -1,3 +1,5 @@
+package twentytwentyone
+
 import res.asType
 import res.load
 import util.part1Result
@@ -112,7 +114,7 @@ fun day6Part2(input: List<LanternFish>): Long {
 }
 
 fun main() {
-    val input = load("day6.txt", ",").asType { LanternFish(it.toInt()) }
+    val input = load("2021/day6.txt", ",").asType { LanternFish(it.toInt()) }
 
     day6Part1(input).part1Result()
     day6Part2(input).part2Result()

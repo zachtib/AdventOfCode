@@ -1,3 +1,5 @@
+package twentytwentyone
+
 import libadvent.util.toBinaryInt
 import res.asStrings
 import res.load
@@ -73,7 +75,7 @@ fun day3Part2(input: List<String>): Int {
 }
 
 fun main() {
-    val input = load("day3.txt").asStrings()
+    val input = load("2021/day3.txt").asStrings()
     day3Part1(input).part1Result()
     day3Part2(input).part2Result()
 }

@@ -1,3 +1,5 @@
+package twentytwentyone
+
 import res.asStrings
 import res.resourceOf
 import kotlin.test.Test

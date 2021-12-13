@@ -1,3 +1,5 @@
+package twentytwentyone
+
 import res.asType
 import res.load
 import util.part1Result
@@ -71,7 +73,7 @@ fun day2Part2(input: List<SubmarineCommand>): Int {
 }
 
 fun main() {
-    val input = load("day2.txt").asType { it.toSubmarineCommand() }
+    val input = load("2021/day2.txt").asType { it.toSubmarineCommand() }
     day2Part1(input).part1Result()
     day2Part2(input).part2Result()
 }

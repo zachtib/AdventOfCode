@@ -1,3 +1,5 @@
+package twentytwentyone
+
 import libadvent.util.toListOfInts
 import res.Resource
 import res.asComplexType
@@ -101,7 +103,7 @@ fun Resource.asBingoBoardWithInputs() = asComplexType {
 }
 
 fun main() {
-    val input = load("day4.txt").asBingoBoardWithInputs()
+    val input = load("2021/day4.txt").asBingoBoardWithInputs()
     day4Part1(input.copy()).part1Result()
     day4Part2(input.copy()).part2Result()
 }

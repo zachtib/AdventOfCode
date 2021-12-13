@@ -1,3 +1,5 @@
+package twentytwentyone
+
 import res.asInts
 import res.load
 import util.part1Result
@@ -16,7 +18,7 @@ fun day1Part2(input: List<Int>): Int {
 }
 
 fun main() {
-    val input = load("day1.txt").asInts()
+    val input = load("2021/day1.txt").asInts()
     day1Part1(input).part1Result()
     day1Part2(input).part2Result()
 }
