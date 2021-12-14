@@ -1,5 +1,7 @@
 package twentytwentyone
 
+import libadvent.part1Result
+import libadvent.part2Result
 import libadvent.util.isNotSupersetOf
 import libadvent.util.isSubsetOf
 import libadvent.util.isSupersetOf

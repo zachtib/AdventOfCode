@@ -1,4 +1,4 @@
-package util
+package libadvent
 
 private fun printError(message: Any) {
     System.err.println(message)

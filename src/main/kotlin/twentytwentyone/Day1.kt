@@ -2,8 +2,8 @@ package twentytwentyone
 
 import res.asInts
 import res.load
-import util.part1Result
-import util.part2Result
+import libadvent.part1Result
+import libadvent.part2Result
 
 fun day1Part1(input: List<Int>): Int {
     return input.windowed(2)

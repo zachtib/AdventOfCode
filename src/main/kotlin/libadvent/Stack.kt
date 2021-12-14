@@ -1,4 +1,4 @@
-package util
+package libadvent
 
 class Stack<T> private constructor(private val values: MutableList<T>): Collection<T> {
 

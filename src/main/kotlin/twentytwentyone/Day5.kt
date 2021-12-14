@@ -3,9 +3,10 @@ package twentytwentyone
 import libadvent.geometry.*
 import libadvent.grid.MutableGrid
 import libadvent.grid.count
+import libadvent.part1Result
+import libadvent.part2Result
 import res.asType
 import res.load
-import util.*
 
 
 fun rangeIgnoringOrder(i1: Int, i2: Int): Iterable<Int> {

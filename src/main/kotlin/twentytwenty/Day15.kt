@@ -1,7 +1,7 @@
 package twentytwenty
 
-import util.part1Result
-import util.part2Result
+import libadvent.part1Result
+import libadvent.part2Result
 
 class MemoryGame {
 

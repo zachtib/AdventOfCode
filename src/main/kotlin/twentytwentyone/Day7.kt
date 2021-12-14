@@ -2,9 +2,9 @@ package twentytwentyone
 
 import res.asInts
 import res.load
-import util.EmptyCollectionException
-import util.part1Result
-import util.part2Result
+import libadvent.EmptyCollectionException
+import libadvent.part1Result
+import libadvent.part2Result
 import kotlin.math.abs
 
 

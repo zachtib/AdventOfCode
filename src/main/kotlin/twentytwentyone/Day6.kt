@@ -2,8 +2,8 @@ package twentytwentyone
 
 import res.asType
 import res.load
-import util.part1Result
-import util.part2Result
+import libadvent.part1Result
+import libadvent.part2Result
 
 data class LanternFish(var daysRemaining: Int = DAYS_FOR_INITIAL_CYCLE) {
     companion object {

@@ -2,9 +2,10 @@ package twentytwentyone
 
 import libadvent.geometry.Point
 import libadvent.grid.*
+import libadvent.part1
+import libadvent.part2
 import res.asGrid
 import res.load
-import util.*
 
 data class BioluminescentOctopus(
     var energyLevel: Int,

@@ -6,8 +6,8 @@ import libadvent.util.itemsPairedWith
 import libadvent.util.toPair
 import res.asType
 import res.load
-import util.part1
-import util.part2
+import libadvent.part1
+import libadvent.part2
 
 
 class IllegalCaveException(input: String) : RuntimeException("$input is not a valid cave node")

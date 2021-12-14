@@ -2,9 +2,10 @@ package twentytwentyone
 
 import libadvent.geometry.Point
 import libadvent.grid.*
+import libadvent.part1Result
+import libadvent.part2Result
 import res.asGrid
 import res.load
-import util.*
 
 fun Grid<Int>.findLowPoints(): List<Pair<Int, Int>> {
     return buildList {

@@ -8,8 +8,8 @@ import libadvent.util.map
 import res.Resource
 import res.asComplexType
 import res.load
-import util.part1
-import util.part2
+import libadvent.part1
+import libadvent.part2
 
 class InvalidFoldInstruction(string: String) : RuntimeException("\"$string\" was not a valid fold")
 

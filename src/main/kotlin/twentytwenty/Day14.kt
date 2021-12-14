@@ -2,8 +2,8 @@ package twentytwenty
 
 import res.asType
 import res.load
-import util.part1Result
-import util.part2Result
+import libadvent.part1Result
+import libadvent.part2Result
 import kotlin.math.pow
 
 sealed class BitmaskInstruction {

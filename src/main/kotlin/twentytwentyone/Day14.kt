@@ -1,12 +1,13 @@
 package twentytwentyone
 
+import libadvent.util.increment
 import libadvent.util.toPair
 import res.Resource
 import res.asComplexType
 import res.load
-import util.EmptyCollectionException
-import util.part1
-import util.part2
+import libadvent.EmptyCollectionException
+import libadvent.part1
+import libadvent.part2
 
 
 @JvmInline
@@ -53,12 +54,12 @@ fun PolymerTemplate.getElementCountsAfterIterations(iterations: Int, insertions:
 
     val elementCounts = mutableMapOf<Char, Long>()
     for (element in template) {
-        elementCounts[element] = elementCounts.getOrDefault(element, 0L) + 1
+        elementCounts.increment(element)
     }
 
     var currentGeneration = mutableMapOf<String, Long>()
     for (pair in template.windowed(2)) {
-        currentGeneration[pair] = currentGeneration.getOrDefault(pair, 0L) + 1
+        currentGeneration.increment(pair)
     }
 
     for (step in 1..iterations) {
@@ -71,9 +72,9 @@ fun PolymerTemplate.getElementCountsAfterIterations(iterations: Int, insertions:
             val firstString = "${pair[0]}$insertedCharacter"
             val secondString = "$insertedCharacter${pair[1]}"
 
-            elementCounts[insertedCharacter] = elementCounts.getOrDefault(insertedCharacter, 0L) + count
-            nextGeneration[firstString] = nextGeneration.getOrDefault(firstString, 0L) + count
-            nextGeneration[secondString] = nextGeneration.getOrDefault(secondString, 0L) + count
+            elementCounts.increment(insertedCharacter, count)
+            nextGeneration.increment(firstString, count)
+            nextGeneration.increment(secondString, count)
         }
         currentGeneration = nextGeneration
     }
@@ -82,8 +83,7 @@ fun PolymerTemplate.getElementCountsAfterIterations(iterations: Int, insertions:
 }
 
 fun PolymerTemplate.getElementCounts(): Map<Char, Int> {
-    val uniqueElements = this.template.toSet()
-    return uniqueElements.associateWith { element -> template.count { it == element } }
+    return template.toSet().associateWith { element -> template.count { it == element } }
 }
 
 fun day14Part1(template: PolymerTemplate, insertions: List<PairInsertion>): Int {
