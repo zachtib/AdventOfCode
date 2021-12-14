@@ -108,7 +108,7 @@ class Day14Tests {
 
     @Test
     fun `test part2 sample`() {
-        val actual = day14Part2()
-        assertEquals(0, actual)
+        val actual = day14Part2(sampleTemplate, samplePairInsertions)
+        assertEquals(2188189693529L, actual)
     }
 }

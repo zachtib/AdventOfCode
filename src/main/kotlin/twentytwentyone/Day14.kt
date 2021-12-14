@@ -53,6 +53,15 @@ fun PolymerTemplate.getElementCounts(): Map<Char, Int> {
     return uniqueElements.associateWith { element ->  template.count { it == element  } }
 }
 
+fun PolymerTemplate.getLongElementCounts(): Map<Char, Long> {
+    val result = mutableMapOf<Char, Long>()
+    for (element in template) {
+        val count = result.getOrDefault(element, 0L)
+        result[element] = count + 1
+    }
+    return result
+}
+
 fun day14Part1(template: PolymerTemplate, insertions: List<PairInsertion>): Int {
     var polymer = template
     repeat(10) {
@@ -66,12 +75,21 @@ fun day14Part1(template: PolymerTemplate, insertions: List<PairInsertion>): Int 
     return maximum - minimum
 }
 
-fun day14Part2(): Int {
-    throw NotImplementedError()
+fun day14Part2(template: PolymerTemplate, insertions: List<PairInsertion>): Long {
+    var polymer = template
+    repeat(40) {
+        polymer = polymer.applyPairInsertions(insertions)
+    }
+
+    val elementCounts = polymer.getLongElementCounts()
+    val minimum = elementCounts.minOfOrNull { entry -> entry.value } ?: throw EmptyCollectionException()
+    val maximum = elementCounts.maxOfOrNull { entry -> entry.value } ?: throw EmptyCollectionException()
+
+    return maximum - minimum
 }
 
 fun main() {
     val (template, insertions) = load("2021/day14.txt").asPolymerInputs()
     part1 { day14Part1(template, insertions) }
-    part2 { day14Part2() }
+    part2 { day14Part2(template, insertions) }
 }
