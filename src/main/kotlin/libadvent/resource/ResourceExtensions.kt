@@ -1,4 +1,4 @@
-package res
+package libadvent.resource
 
 import libadvent.grid.ArrayGrid
 import libadvent.grid.Grid

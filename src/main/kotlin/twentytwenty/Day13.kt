@@ -1,6 +1,6 @@
 package twentytwenty
 
-import res.load
+import libadvent.resource.load
 
 sealed class Bus {
     data class InService(val id: Int) : Bus()

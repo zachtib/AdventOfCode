@@ -1,8 +1,8 @@
 package twentytwentyone
 
 import org.junit.Test
-import res.asType
-import res.resourceOf
+import libadvent.resource.asType
+import libadvent.resource.resourceOf
 import kotlin.test.assertEquals
 
 class Day2Tests {

@@ -1,7 +1,7 @@
 package twentytwenty
 
-import res.asStrings
-import res.load
+import libadvent.resource.asStrings
+import libadvent.resource.load
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 

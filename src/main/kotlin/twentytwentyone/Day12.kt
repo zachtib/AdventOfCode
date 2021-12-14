@@ -4,8 +4,8 @@ import libadvent.util.allLowerCase
 import libadvent.util.allUpperCase
 import libadvent.util.itemsPairedWith
 import libadvent.util.toPair
-import res.asType
-import res.load
+import libadvent.resource.asType
+import libadvent.resource.load
 import libadvent.part1
 import libadvent.part2
 

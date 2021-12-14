@@ -1,7 +1,7 @@
 package twentytwenty
 
-import res.asType
-import res.load
+import libadvent.resource.asType
+import libadvent.resource.load
 
 data class PasswordPolicy(val range: IntRange, val char: Char, val password: String)
 

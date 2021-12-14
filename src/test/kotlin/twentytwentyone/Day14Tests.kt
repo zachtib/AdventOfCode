@@ -1,6 +1,6 @@
 package twentytwentyone
 
-import res.resourceOf
+import libadvent.resource.resourceOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

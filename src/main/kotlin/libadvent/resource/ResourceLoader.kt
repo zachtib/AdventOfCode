@@ -1,4 +1,4 @@
-package res
+package libadvent.resource
 
 import java.io.FileNotFoundException
 import java.net.URL

@@ -3,9 +3,9 @@ package twentytwentyone
 import libadvent.part1Result
 import libadvent.part2Result
 import libadvent.util.toListOfInts
-import res.Resource
-import res.asComplexType
-import res.load
+import libadvent.resource.Resource
+import libadvent.resource.asComplexType
+import libadvent.resource.load
 
 data class BingoBoardsWithInputs(
     val inputs: List<Int>,

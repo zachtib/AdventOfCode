@@ -5,8 +5,8 @@ import libadvent.part2Result
 import libadvent.util.isNotSupersetOf
 import libadvent.util.isSubsetOf
 import libadvent.util.isSupersetOf
-import res.asType
-import res.load
+import libadvent.resource.asType
+import libadvent.resource.load
 import util.*
 
 data class SevenSegmentNotes(val signalPatterns: List<String>, val outputValue: List<String>)

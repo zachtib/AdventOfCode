@@ -5,9 +5,9 @@ import libadvent.geometry.bounds
 import libadvent.geometry.toPoint
 import libadvent.grid.*
 import libadvent.util.map
-import res.Resource
-import res.asComplexType
-import res.load
+import libadvent.resource.Resource
+import libadvent.resource.asComplexType
+import libadvent.resource.load
 import libadvent.part1
 import libadvent.part2
 

@@ -1,4 +1,4 @@
-package res
+package libadvent.resource
 
 interface ComplexTypeBuilderScope {
     fun <T> takeOne(transform: (String) -> T): T

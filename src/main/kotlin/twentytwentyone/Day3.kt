@@ -4,8 +4,8 @@ import libadvent.EmptyCollectionException
 import libadvent.part1Result
 import libadvent.part2Result
 import libadvent.util.toBinaryInt
-import res.asStrings
-import res.load
+import libadvent.resource.asStrings
+import libadvent.resource.load
 
 
 fun <T> List<T>.getElementCounts(): Map<T, Int> = buildMap {

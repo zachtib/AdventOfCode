@@ -1,7 +1,7 @@
 package twentytwentyone
 
-import res.asStrings
-import res.resourceOf
+import libadvent.resource.asStrings
+import libadvent.resource.resourceOf
 import kotlin.test.*
 
 class Day10Tests {

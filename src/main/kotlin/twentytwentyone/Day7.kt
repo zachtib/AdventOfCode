@@ -1,7 +1,7 @@
 package twentytwentyone
 
-import res.asInts
-import res.load
+import libadvent.resource.asInts
+import libadvent.resource.load
 import libadvent.EmptyCollectionException
 import libadvent.part1Result
 import libadvent.part2Result

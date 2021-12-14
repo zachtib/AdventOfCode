@@ -1,7 +1,7 @@
 package util
 
-import res.asInts
-import res.load
+import libadvent.resource.asInts
+import libadvent.resource.load
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

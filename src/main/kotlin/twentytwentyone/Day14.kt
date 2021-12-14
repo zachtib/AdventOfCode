@@ -2,9 +2,9 @@ package twentytwentyone
 
 import libadvent.util.increment
 import libadvent.util.toPair
-import res.Resource
-import res.asComplexType
-import res.load
+import libadvent.resource.Resource
+import libadvent.resource.asComplexType
+import libadvent.resource.load
 import libadvent.EmptyCollectionException
 import libadvent.part1
 import libadvent.part2

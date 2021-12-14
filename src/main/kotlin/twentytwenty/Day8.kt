@@ -1,7 +1,7 @@
 package twentytwenty
 
-import res.asType
-import res.load
+import libadvent.resource.asType
+import libadvent.resource.load
 
 sealed class Instruction {
     data class Acc(val value: Int) : Instruction()

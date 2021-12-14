@@ -1,7 +1,7 @@
 package twentytwentyone
 
-import res.asComplexType
-import res.resourceOf
+import libadvent.resource.asComplexType
+import libadvent.resource.resourceOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

@@ -1,6 +1,6 @@
 package twentytwenty
 
-import res.load
+import libadvent.resource.load
 import libadvent.util.as2dArray
 
 sealed class Tile {

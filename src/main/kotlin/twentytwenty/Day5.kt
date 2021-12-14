@@ -1,7 +1,7 @@
 package twentytwenty
 
-import res.asType
-import res.load
+import libadvent.resource.asType
+import libadvent.resource.load
 
 fun IntRange.takeFront(): IntRange {
     val pivot: Int = (last - first) / 2 + first

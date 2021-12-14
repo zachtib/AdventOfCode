@@ -1,8 +1,8 @@
 package twentytwentyone
 
 import libadvent.geometry.*
-import res.asType
-import res.resourceOf
+import libadvent.resource.asType
+import libadvent.resource.resourceOf
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals

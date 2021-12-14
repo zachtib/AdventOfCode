@@ -1,7 +1,7 @@
 package twentytwenty
 
-import res.asInts
-import res.load
+import libadvent.resource.asInts
+import libadvent.resource.load
 
 data class JoltageDistribution(
         var ones: Int = 0,

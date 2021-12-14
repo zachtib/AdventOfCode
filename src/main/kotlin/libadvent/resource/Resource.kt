@@ -1,4 +1,4 @@
-package res
+package libadvent.resource
 
 interface Resource {
     val body: String

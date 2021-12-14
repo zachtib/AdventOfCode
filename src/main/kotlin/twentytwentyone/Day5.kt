@@ -5,8 +5,8 @@ import libadvent.grid.MutableGrid
 import libadvent.grid.count
 import libadvent.part1Result
 import libadvent.part2Result
-import res.asType
-import res.load
+import libadvent.resource.asType
+import libadvent.resource.load
 
 
 fun rangeIgnoringOrder(i1: Int, i2: Int): Iterable<Int> {

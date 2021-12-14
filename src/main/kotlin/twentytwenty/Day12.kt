@@ -1,8 +1,7 @@
 package twentytwenty
 
-import res.asInts
-import res.asType
-import res.load
+import libadvent.resource.asType
+import libadvent.resource.load
 import kotlin.math.abs
 
 enum class Direction {

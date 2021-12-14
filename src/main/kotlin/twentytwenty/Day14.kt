@@ -1,7 +1,7 @@
 package twentytwenty
 
-import res.asType
-import res.load
+import libadvent.resource.asType
+import libadvent.resource.load
 import libadvent.part1Result
 import libadvent.part2Result
 import kotlin.math.pow

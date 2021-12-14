@@ -1,7 +1,7 @@
 package twentytwenty
 
-import res.asInts
-import res.load
+import libadvent.resource.asInts
+import libadvent.resource.load
 import kotlin.Triple
 
 fun List<Int>.getPairsSummingTo(sum: Int): List<Pair<Int, Int>> {

@@ -1,7 +1,7 @@
 package twentytwentyone
 
-import res.asGrid
-import res.resourceOf
+import libadvent.resource.asGrid
+import libadvent.resource.resourceOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

@@ -5,8 +5,8 @@ import libadvent.emptyStack
 import libadvent.part1
 import libadvent.part2
 import libadvent.util.isEven
-import res.asStrings
-import res.load
+import libadvent.resource.asStrings
+import libadvent.resource.load
 
 class InvalidChunkToken(token: Char) : RuntimeException("$token is not a valid ChunkToken")
 

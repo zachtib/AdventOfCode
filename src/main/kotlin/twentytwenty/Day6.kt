@@ -1,6 +1,6 @@
 package twentytwenty
 
-import res.load
+import libadvent.resource.load
 
 fun calculateGroupSum(input: String): Int {
     val groups = input.split("\n\n")

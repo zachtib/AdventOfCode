@@ -1,7 +1,7 @@
 package twentytwenty
 
-import res.asType
-import res.load
+import libadvent.resource.asType
+import libadvent.resource.load
 
 data class Passport(
     var byr: String? = null,

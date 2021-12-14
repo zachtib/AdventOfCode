@@ -1,8 +1,7 @@
 package twentytwenty
 
-import res.asInts
-import res.asLongs
-import res.load
+import libadvent.resource.asLongs
+import libadvent.resource.load
 
 class SlidingList<T>(
         private val maxSize: Int,

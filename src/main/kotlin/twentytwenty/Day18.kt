@@ -1,6 +1,6 @@
 package twentytwenty
 
-import res.load
+import libadvent.resource.load
 import libadvent.part1Result
 import libadvent.part2Result
 
