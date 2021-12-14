@@ -64,6 +64,12 @@ class Day14Tests {
     }
 
     @Test
+    fun `test again that after step 10, it has length 3073`() {
+        val result = sampleTemplate.getElementCountsAfterIterations(10, samplePairInsertions)
+        assertEquals(3073L, result.values.sum())
+    }
+
+    @Test
     fun `test that after step 10, B occurs 1749 times`() {
         var polymer = sampleTemplate
         repeat(10) {

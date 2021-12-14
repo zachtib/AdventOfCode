@@ -48,18 +48,42 @@ fun PolymerTemplate.applyPairInsertions(insertions: List<PairInsertion>): Polyme
     return PolymerTemplate(elements.joinToString(""))
 }
 
-fun PolymerTemplate.getElementCounts(): Map<Char, Int> {
-    val uniqueElements = this.template.toSet()
-    return uniqueElements.associateWith { element ->  template.count { it == element  } }
+fun PolymerTemplate.getElementCountsAfterIterations(iterations: Int, insertions: List<PairInsertion>): Map<Char, Long> {
+    val rules = insertions.associate { "${it.pair.first}${it.pair.second}" to it.insertion }
+
+    val elementCounts = mutableMapOf<Char, Long>()
+    for (element in template) {
+        elementCounts[element] = elementCounts.getOrDefault(element, 0L) + 1
+    }
+
+    var currentGeneration = mutableMapOf<String, Long>()
+    for (pair in template.windowed(2)) {
+        currentGeneration[pair] = currentGeneration.getOrDefault(pair, 0L) + 1
+    }
+
+    for (step in 1..iterations) {
+        println("Step $step")
+
+        val nextGeneration = mutableMapOf<String, Long>()
+        for ((pair, count) in currentGeneration) {
+            val insertedCharacter = rules[pair] ?: continue
+
+            val firstString = "${pair[0]}$insertedCharacter"
+            val secondString = "$insertedCharacter${pair[1]}"
+
+            elementCounts[insertedCharacter] = elementCounts.getOrDefault(insertedCharacter, 0L) + count
+            nextGeneration[firstString] = nextGeneration.getOrDefault(firstString, 0L) + count
+            nextGeneration[secondString] = nextGeneration.getOrDefault(secondString, 0L) + count
+        }
+        currentGeneration = nextGeneration
+    }
+
+    return elementCounts.toMap()
 }
 
-fun PolymerTemplate.getLongElementCounts(): Map<Char, Long> {
-    val result = mutableMapOf<Char, Long>()
-    for (element in template) {
-        val count = result.getOrDefault(element, 0L)
-        result[element] = count + 1
-    }
-    return result
+fun PolymerTemplate.getElementCounts(): Map<Char, Int> {
+    val uniqueElements = this.template.toSet()
+    return uniqueElements.associateWith { element -> template.count { it == element } }
 }
 
 fun day14Part1(template: PolymerTemplate, insertions: List<PairInsertion>): Int {
@@ -76,12 +100,7 @@ fun day14Part1(template: PolymerTemplate, insertions: List<PairInsertion>): Int 
 }
 
 fun day14Part2(template: PolymerTemplate, insertions: List<PairInsertion>): Long {
-    var polymer = template
-    repeat(40) {
-        polymer = polymer.applyPairInsertions(insertions)
-    }
-
-    val elementCounts = polymer.getLongElementCounts()
+    val elementCounts = template.getElementCountsAfterIterations(40, insertions)
     val minimum = elementCounts.minOfOrNull { entry -> entry.value } ?: throw EmptyCollectionException()
     val maximum = elementCounts.maxOfOrNull { entry -> entry.value } ?: throw EmptyCollectionException()
 
