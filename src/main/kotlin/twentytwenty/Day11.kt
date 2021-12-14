@@ -1,7 +1,7 @@
 package twentytwenty
 
 import res.load
-import twentytwenty.util.as2dArray
+import libadvent.util.as2dArray
 
 sealed class Tile {
     data class Seat(var occupied: Boolean) : Tile()
