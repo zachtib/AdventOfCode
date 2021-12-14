@@ -65,11 +65,25 @@ fun <T> Grid<T>.count(predicate: (T) -> Boolean): Int {
     return count
 }
 
-fun <T> Grid<T>.joinToString(transform: (T) -> CharSequence): String {
-    return columnIndices.joinToString(separator = "\n") { column ->
-        rowIndices.map { row -> this[row, column] }
-            .joinToString(separator = "") {
-                transform(it)
-            }
+fun <T> Grid<T>.joinToString(
+    columnSeparator: String = "",
+    rowSeparator: String = "\n",
+    transpose: Boolean = false,
+    transform: (T) -> CharSequence = { it.toString() }
+): String {
+    return if (transpose) {
+         columnIndices.joinToString(separator = rowSeparator) { column ->
+            rowIndices.map { row -> this[row, column] }
+                .joinToString(separator = columnSeparator) {
+                    transform(it)
+                }
+        }
+    } else {
+         rowIndices.joinToString(separator = rowSeparator) { row ->
+            columnIndices.map { column -> this[row, column] }
+                .joinToString(separator = columnSeparator) {
+                    transform(it)
+                }
+        }
     }
 }
