@@ -40,6 +40,10 @@ object EmptyGrid : Grid<Nothing> {
     }
 
     override operator fun iterator(): Iterator<Nothing> = EmptyIterator
+
+    override fun equals(other: Any?): Boolean {
+        return other === EmptyGrid || (other is Grid<*> && other.isEmpty())
+    }
 }
 
 class ArrayGrid<T>(private val array: Array<Array<T>>) : MutableGrid<T> {
@@ -66,6 +70,20 @@ class ArrayGrid<T>(private val array: Array<Array<T>>) : MutableGrid<T> {
                 yield(get(row, column))
             }
         }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (other == null || other !is Grid<*>) {
+            return false
+        }
+        return hashCode() == other.hashCode()
+    }
+
+    override fun hashCode(): Int {
+        var result = array.contentDeepHashCode()
+        result = 31 * result + rowIndices.hashCode()
+        result = 31 * result + rowIndices.hashCode()
+        return result
     }
 }
 

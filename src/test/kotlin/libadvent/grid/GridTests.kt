@@ -1,15 +1,41 @@
-package util
+package libadvent.grid
 
-import libadvent.grid.*
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import kotlin.test.*
 
 class GridTests {
     @Test
+    fun `test grid equality`() {
+        val first = gridOf(
+            arrayOf(1, 2),
+            arrayOf(3, 4),
+        )
+        val second = gridOf(
+            arrayOf(1, 2),
+            arrayOf(3, 4),
+        )
+        assertNotSame(first, second)
+        assertEquals(first, second)
+    }
+
+    @Test
+
+    fun `test grid inequality`() {
+        val first = gridOf(
+            arrayOf(1, 2),
+            arrayOf(3, 4),
+        )
+        val second = gridOf(
+            arrayOf(1, 2),
+            arrayOf(4, 4),
+        )
+        assertNotSame(first, second)
+        assertNotEquals(first, second)
+    }
+
+    @Test
     fun `test grid indices`() {
         val grid = Grid(5, 5) { a, b -> a * b }
-        val indices = grid.indices.asSequence().toList()
+        val indices = grid.indices.toList()
         assertEquals(25, indices.size)
     }
 

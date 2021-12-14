@@ -43,6 +43,20 @@ class MutableBoundedGrid<T>(
         array[offsetRow][offsetColumn] = element
         return result
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (other == null || other !is Grid<*>) {
+            return false
+        }
+        return hashCode() == other.hashCode()
+    }
+
+    override fun hashCode(): Int {
+        var result = array.contentDeepHashCode()
+        result = 31 * result + boundRowIndices.hashCode()
+        result = 31 * result + boundColumnIndices.hashCode()
+        return result
+    }
 }
 
 @Suppress("FunctionName")
