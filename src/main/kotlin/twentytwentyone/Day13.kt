@@ -62,7 +62,7 @@ private fun getInitialGrid(points: List<Point>): Grid<Boolean> {
 }
 
 private fun booleanGridString(grid: Grid<Boolean>): String {
-    return grid.joinToString { it.map(ifTrue = "#", ifFalse = ".") }
+    return grid.joinToString(transpose = true) { it.map(ifTrue = "#", ifFalse = ".") }
 }
 
 fun day13Part1(points: List<Point>, folds: List<Fold>, printGridSteps: Boolean = false): Int {
