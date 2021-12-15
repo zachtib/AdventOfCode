@@ -4,6 +4,7 @@ import libadvent.grid.Grid
 import libadvent.grid.columnIndices
 import libadvent.grid.pointsInGridAdjacentTo
 import libadvent.grid.rowIndices
+import kotlin.math.abs
 
 // Interfaces
 
@@ -91,3 +92,5 @@ val Coordinate.row: Int get() = y
 val Coordinate.column: Int get() = x
 fun Coordinate.toPoint(): Point = x to y
 fun Point.toCoordinate() = Coordinate(x = first, y = second)
+
+infix fun Coordinate.manhattanDistance(other: Coordinate) = abs(x - other.x) + abs(y - other.y)

@@ -1,11 +1,14 @@
 package twentytwentyone
 
+import libadvent.algorithms.solveAStarForGrid
 import libadvent.algorithms.solveDijkstraForGrid
 import libadvent.grid.Grid
+import libadvent.grid.toMutableGrid
 import libadvent.part1
 import libadvent.part2
 import libadvent.resource.asGrid
 import libadvent.resource.load
+import kotlin.system.measureTimeMillis
 
 class ScaledGrid(
     private val subGrid: Grid<Int>,
@@ -36,12 +39,12 @@ class ScaledGrid(
 }
 
 fun day15Part1(riskLevels: Grid<Int>): Int {
-    return solveDijkstraForGrid(riskLevels)
+    return solveAStarForGrid(riskLevels)
 }
 
 fun day15Part2(riskLevels: Grid<Int>): Int {
     val scaledGrid = ScaledGrid(riskLevels, 5)
-    return solveDijkstraForGrid(scaledGrid)
+    return solveAStarForGrid(scaledGrid)
 }
 
 fun main() {
