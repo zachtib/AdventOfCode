@@ -1,8 +1,7 @@
 package twentytwentyone
 
-import libadvent.geometry.gridCoordinate
-import libadvent.grid.gridOf
-import libadvent.grid.map
+import libadvent.grid.Grid
+import libadvent.grid.joinToString
 import libadvent.resource.asGrid
 import libadvent.resource.resourceOf
 import kotlin.test.Test
@@ -27,49 +26,33 @@ class Day15Tests {
     }
 
     @Test
-    fun `test finding paths`() {
-        val grid = gridOf(
-            arrayOf(1, 2, 3),
-            arrayOf(4, 5, 6),
-            arrayOf(7, 8, 9),
-        )
-        val paths = findAllAvailablePaths(grid, gridCoordinate(0, 0))
-        for (path in paths) {
-            println(path)
-        }
-        assertEquals(12, paths.size)
-    }
-
-    @Test
-    fun `test naive path`() {
-        val grid = gridOf(
-            arrayOf(1, 2, 5),
-            arrayOf(4, 3, 6),
-            arrayOf(7, 8, 9),
-        ).map { RiskLevel(it) }
-
-        val expectedPath = listOf(
-            gridCoordinate(0, 0),
-            gridCoordinate(0, 1),
-            gridCoordinate(1, 1),
-            gridCoordinate(1, 2),
-            gridCoordinate(2, 2),
-        )
-
-        val (path, level) = grid.determineNaivePath()
-
-        assertEquals(expectedPath, path)
-        assertEquals(20, level.level)
-    }
-
-    @Test
     fun `test part 1 example`() {
         val actual = day15Part1(sampleInput)
         assertEquals(40, actual)
     }
 
+    @Test
+    fun `test scaled grid`() {
+        val risks = Grid(2, 2) { row, column ->
+            RiskLevel(row + column)
+        }
+        println(risks.joinToString(", ") {
+            it.level.toString().padStart(2)
+        })
+        val scaledGrid = ScaledGrid(risks, 5)
+        assertEquals(10, scaledGrid.rows)
+        assertEquals(10, scaledGrid.columns)
+
+        println(scaledGrid.joinToString(", ") {
+            it.level.toString().padStart(2)
+        })
+        assertEquals(9, scaledGrid[9, 8].level)
+        assertEquals(1, scaledGrid[9, 9].level)
+    }
+
+    @Test
     fun `test part 2 example`() {
         val actual = day15Part2(sampleInput)
-        assertEquals(0, actual)
+        assertEquals(315, actual)
     }
 }
