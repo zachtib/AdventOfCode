@@ -69,10 +69,6 @@ fun MutableCoordinate(x: Int, y: Int): MutableCoordinate = MutableCoordinateData
 fun gridCoordinate(row: Int, column: Int) = Coordinate(x = column, y = row)
 fun mutableGridCoordinate(row: Int, column: Int) = MutableCoordinate(x = column, y = row)
 
-fun <T> Grid<T>.pointsInGridAdjacentTo(reference: Coordinate): List<Coordinate> {
-    return pointsInGridAdjacentTo(reference.toPoint()).map { it.toCoordinate() }
-}
-
 fun Grid<Any>.coordinateIterator() = iterator {
     for (row in rowIndices) {
         for (column in columnIndices) {
@@ -90,7 +86,5 @@ operator fun <T> Grid<T>.get(index: Coordinate): T {
 
 val Coordinate.row: Int get() = y
 val Coordinate.column: Int get() = x
-fun Coordinate.toPoint(): Point = x to y
-fun Point.toCoordinate() = Coordinate(x = first, y = second)
 
 infix fun Coordinate.manhattanDistance(other: Coordinate) = abs(x - other.x) + abs(y - other.y)

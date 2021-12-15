@@ -1,6 +1,6 @@
 package libadvent.grid
 
-import libadvent.geometry.Point
+import libadvent.geometry.*
 
 inline fun <T, reified R> Grid<T>.map(transform: (T) -> R): Grid<R> {
     return Grid(rows, columns) { row, column ->
@@ -15,7 +15,7 @@ fun <T> Grid<T>.forEach(func: (item: T) -> Unit) {
 }
 
 fun <T> Grid<T>.forEachIndexed(
-    func: (index: Point, item: T) -> Unit,
+    func: (index: Coordinate, item: T) -> Unit,
 ) = indices.forEach { index ->
     func(index, get(index))
 }
@@ -28,32 +28,35 @@ fun <T> Grid<T>.filter(predicate: (T) -> Boolean) = iterator {
     }
 }
 
-fun <T> Grid<T>.pointsInGridAdjacentTo(reference: Point): List<Point> {
-    val (rowIndex, columnIndex) = reference
+fun <T> Grid<T>.pointsInGridAdjacentTo(reference: Coordinate): List<Coordinate> {
+    val rowIndex = reference.row
+    val columnIndex = reference.column
 
     return listOf(
-        rowIndex - 1 to columnIndex,
-        rowIndex + 1 to columnIndex,
-        rowIndex to columnIndex - 1,
-        rowIndex to columnIndex + 1
-    ).filter { (rowIndex, columnIndex) ->
-        rowIndex in rowIndices && columnIndex in columnIndices
+        gridCoordinate(rowIndex - 1, columnIndex),
+        gridCoordinate(rowIndex + 1, columnIndex),
+        gridCoordinate(rowIndex, columnIndex - 1),
+        gridCoordinate(rowIndex, columnIndex + 1),
+    ).filter { coordinate ->
+        coordinate.row in rowIndices && coordinate.column in columnIndices
     }
 }
 
-fun <T> Grid<T>.pointsInGridAdjacentOrDiagonalTo(reference: Point): List<Point> {
-    val (rowIndex, columnIndex) = reference
+fun <T> Grid<T>.pointsInGridAdjacentOrDiagonalTo(reference: Coordinate): List<Coordinate> {
+    val rowIndex = reference.row
+    val columnIndex = reference.column
+
     return listOf(
-        rowIndex - 1 to columnIndex - 1,
-        rowIndex - 1 to columnIndex,
-        rowIndex - 1 to columnIndex + 1,
-        rowIndex to columnIndex - 1,
-        rowIndex to columnIndex + 1,
-        rowIndex + 1 to columnIndex - 1,
-        rowIndex + 1 to columnIndex,
-        rowIndex + 1 to columnIndex + 1,
-    ).filter { (rowIndex, columnIndex) ->
-        rowIndex in rowIndices && columnIndex in columnIndices
+        gridCoordinate(rowIndex - 1, columnIndex -1),
+        gridCoordinate(rowIndex - 1, columnIndex),
+        gridCoordinate(rowIndex - 1, columnIndex + 1),
+        gridCoordinate(rowIndex, columnIndex - 1),
+        gridCoordinate(rowIndex, columnIndex + 1),
+        gridCoordinate(rowIndex + 1, columnIndex -1),
+        gridCoordinate(rowIndex + 1, columnIndex),
+        gridCoordinate(rowIndex + 1, columnIndex + 1),
+    ).filter { coordinate ->
+        coordinate.row in rowIndices && coordinate.column in columnIndices
     }
 }
 

@@ -1,5 +1,6 @@
 package twentytwentyone
 
+import libadvent.geometry.gridCoordinate
 import libadvent.resource.asGrid
 import libadvent.resource.resourceOf
 import kotlin.test.Test
@@ -32,9 +33,15 @@ class Day9Tests {
 
     @Test
     fun `test generating basin`() {
-        val basin = sampleInput.calculateBasinFromLowPoint(0 to 1)
+        val basin = sampleInput.calculateBasinFromLowPoint(gridCoordinate(0, 1))
 
-        assertEquals(setOf(0 to 0, 0 to 1, 1 to 0), basin)
+        assertEquals(
+            setOf(
+                gridCoordinate(0, 0),
+                gridCoordinate(0, 1),
+                gridCoordinate(1, 0)
+            ), basin
+        )
     }
 
     @Test

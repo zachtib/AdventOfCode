@@ -1,6 +1,8 @@
 package libadvent.grid
 
+import libadvent.geometry.Coordinate
 import libadvent.geometry.Point
+import libadvent.geometry.gridCoordinate
 
 
 internal object EmptyIterator : ListIterator<Nothing> {
@@ -87,11 +89,11 @@ class ArrayGrid<T>(private val array: Array<Array<T>>) : MutableGrid<T> {
     }
 }
 
-val <T> Grid<T>.indices: List<Point>
+val <T> Grid<T>.indices: List<Coordinate>
     get() = buildList {
         for (row in rowIndices) {
             for (column in columnIndices) {
-                add(row to column)
+                add(gridCoordinate(row, column))
             }
         }
     }
@@ -145,6 +147,3 @@ inline fun <reified T> Grid<T>.toMutableGrid(): MutableGrid<T> {
         this[row, column]
     }
 }
-
-operator fun <T> Grid<T>.get(point: Point) = get(point.first, point.second)
-operator fun <T> MutableGrid<T>.set(point: Point, value: T) = set(point.first, point.second, value)

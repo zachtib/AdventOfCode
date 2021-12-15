@@ -1,15 +1,16 @@
 package twentytwentyone
 
-import libadvent.geometry.Point
+import libadvent.geometry.Coordinate
+import libadvent.geometry.get
 import libadvent.grid.*
 import libadvent.part1Result
 import libadvent.part2Result
 import libadvent.resource.asGrid
 import libadvent.resource.load
 
-fun Grid<Int>.findLowPoints(): List<Pair<Int, Int>> {
+fun Grid<Int>.findLowPoints(): List<Coordinate> {
     return buildList {
-        forEachIndexed { reference: Point, referenceValue: Int ->
+        forEachIndexed { reference: Coordinate, referenceValue: Int ->
             if (pointsInGridAdjacentTo(reference)
                     .map { point -> get(point) }
                     .all { referenceValue < it }
@@ -21,7 +22,7 @@ fun Grid<Int>.findLowPoints(): List<Pair<Int, Int>> {
 }
 
 
-fun Grid<Int>.calculateBasinFromLowPoint(lowPoint: Pair<Int, Int>): Set<Pair<Int, Int>> {
+fun Grid<Int>.calculateBasinFromLowPoint(lowPoint: Coordinate): Set<Coordinate> {
     val basin = mutableSetOf(lowPoint)
     val pointQueue = mutableListOf(lowPoint)
 
@@ -44,8 +45,8 @@ fun Grid<Int>.calculateBasinFromLowPoint(lowPoint: Pair<Int, Int>): Set<Pair<Int
 }
 
 fun day9Part1(input: Grid<Int>): Int {
-    return input.findLowPoints().sumOf { (rowIndex, columnIndex) ->
-        input[rowIndex, columnIndex] + 1
+    return input.findLowPoints().sumOf { coordinate ->
+        input[coordinate] + 1
     }
 }
 

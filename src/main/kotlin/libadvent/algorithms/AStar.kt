@@ -3,6 +3,7 @@ package libadvent.algorithms
 import libadvent.NoPathFoundException
 import libadvent.geometry.*
 import libadvent.grid.Grid
+import libadvent.grid.pointsInGridAdjacentTo
 
 fun solveAStarForGrid(
     distances: Grid<Int>,

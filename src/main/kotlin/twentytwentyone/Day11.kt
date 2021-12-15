@@ -1,7 +1,11 @@
 package twentytwentyone
 
-import libadvent.geometry.Point
-import libadvent.grid.*
+import libadvent.geometry.Coordinate
+import libadvent.geometry.get
+import libadvent.grid.Grid
+import libadvent.grid.forEachIndexed
+import libadvent.grid.map
+import libadvent.grid.pointsInGridAdjacentOrDiagonalTo
 import libadvent.part1
 import libadvent.part2
 import libadvent.resource.asGrid
@@ -36,11 +40,11 @@ fun Grid<BioluminescentOctopus>.resetFlashes() = forEach {
 
 fun Grid<BioluminescentOctopus>.increaseEnergyLevels() = forEach { it.increaseEnergy() }
 
-fun Grid<BioluminescentOctopus>.increaseEnergyLevelsAtIndices(indices: List<Point>) = indices.forEach { index ->
+fun Grid<BioluminescentOctopus>.increaseEnergyLevelsAtIndices(indices: List<Coordinate>) = indices.forEach { index ->
     this[index].increaseEnergy()
 }
 
-fun Grid<BioluminescentOctopus>.getFlashingIndices(): Collection<Point> {
+fun Grid<BioluminescentOctopus>.getFlashingIndices(): Collection<Coordinate> {
     return buildList {
         this@getFlashingIndices.forEachIndexed { index, octopus ->
             if (octopus.shouldFlash()) {

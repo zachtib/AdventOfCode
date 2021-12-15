@@ -3,6 +3,7 @@ package libadvent.algorithms
 import libadvent.geometry.*
 import libadvent.grid.Grid
 import libadvent.grid.map
+import libadvent.grid.pointsInGridAdjacentTo
 
 
 data class DijkstraGridNode(
