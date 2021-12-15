@@ -21,9 +21,7 @@ class Day15Tests {
             1293138521
             2311944581
         """.trimIndent()
-    ).asGrid { char ->
-        RiskLevel(char.digitToInt())
-    }
+    ).asGrid { char -> char.digitToInt() }
 
     @Test
     fun `test part 1 example`() {
@@ -34,20 +32,20 @@ class Day15Tests {
     @Test
     fun `test scaled grid`() {
         val risks = Grid(2, 2) { row, column ->
-            RiskLevel(row + column)
+            row + column
         }
         println(risks.joinToString(", ") {
-            it.level.toString().padStart(2)
+            it.toString().padStart(2)
         })
         val scaledGrid = ScaledGrid(risks, 5)
         assertEquals(10, scaledGrid.rows)
         assertEquals(10, scaledGrid.columns)
 
         println(scaledGrid.joinToString(", ") {
-            it.level.toString().padStart(2)
+            it.toString().padStart(2)
         })
-        assertEquals(9, scaledGrid[9, 8].level)
-        assertEquals(1, scaledGrid[9, 9].level)
+        assertEquals(9, scaledGrid[9, 8])
+        assertEquals(1, scaledGrid[9, 9])
     }
 
     @Test
