@@ -4,6 +4,7 @@ import libadvent.part1
 import libadvent.part2
 import libadvent.resource.load
 import libadvent.util.toBinaryInt
+import libadvent.util.toBinaryLong
 
 
 data class BitsPacket(val content: String)
@@ -62,8 +63,20 @@ class Biterator(private val binaryString: String) {
 }
 
 sealed class DecodedBitsPacket {
-    data class Literal(val value: Int) : DecodedBitsPacket()
-    data class Operator(val subpackets: List<DecodedBitsPacket>) : DecodedBitsPacket()
+    abstract val version: Int
+    abstract val typeId: Int
+
+    data class Literal(
+        override val version: Int,
+        override val typeId: Int,
+        val value: Long,
+    ) : DecodedBitsPacket()
+
+    data class Operator(
+        override val version: Int,
+        override val typeId: Int,
+        val subpackets: List<DecodedBitsPacket>,
+    ) : DecodedBitsPacket()
 }
 
 class BitsDecoder {
@@ -72,7 +85,7 @@ class BitsDecoder {
         private const val TYPE_ID_LITERAL = 4
     }
 
-    private fun decodeLiteralValue(biterator: Biterator): Int {
+    private fun decodeLiteralValue(biterator: Biterator): Long {
         var bitChunks = ""
         var chunk = biterator.takeBitsAsStringOrNull(5)
         while (chunk != null) {
@@ -88,7 +101,7 @@ class BitsDecoder {
             }
         }
 
-        return bitChunks.toBinaryInt()
+        return bitChunks.toBinaryLong()
     }
 
     private fun decodePacket(biterator: Biterator): DecodedBitsPacket? {
@@ -100,7 +113,11 @@ class BitsDecoder {
         if (typeId == TYPE_ID_LITERAL) {
             val decodedValue = decodeLiteralValue(biterator)
             println("decoded value: $decodedValue")
-            return DecodedBitsPacket.Literal(decodedValue)
+            return DecodedBitsPacket.Literal(
+                version = packetVersion,
+                typeId = typeId,
+                value = decodedValue,
+            )
         }
         val lengthTypeId = biterator.takeBitsAsInt(1)
 
@@ -117,7 +134,11 @@ class BitsDecoder {
                     nextPacket = decodePacket(subiterator)
                 }
             }
-            return DecodedBitsPacket.Operator(subpackets)
+            return DecodedBitsPacket.Operator(
+                version = packetVersion,
+                typeId = typeId,
+                subpackets = subpackets,
+            )
         } else if (lengthTypeId == 1) {
             val numberOfSubPackets = biterator.takeBitsAsInt(11)
             println("packets: $numberOfSubPackets")
@@ -126,22 +147,39 @@ class BitsDecoder {
                     add(decodePacket(biterator)!!)
                 }
             }
-            return DecodedBitsPacket.Operator(subpackets)
+            return DecodedBitsPacket.Operator(
+                version = packetVersion,
+                typeId = typeId,
+                subpackets = subpackets,
+            )
         }
         return null
     }
 
-    fun decodePacket(packet: BitsPacket): DecodedBitsPacket {
+    fun decodePacket(packet: BitsPacket): DecodedBitsPacket? {
         val biterator = packet.biterator()
-        return decodePacket(biterator)!!
+        return decodePacket(biterator)
+    }
+}
+
+
+private fun sumAllVersionNumbers(packets: List<DecodedBitsPacket>): Int {
+    return packets.sumOf { sumAllVersionNumbers(it) }
+}
+
+fun sumAllVersionNumbers(decodedPacket: DecodedBitsPacket?): Int {
+    val packet = decodedPacket ?: return 0
+    return packet.version + when (decodedPacket) {
+        is DecodedBitsPacket.Literal -> 0
+        is DecodedBitsPacket.Operator -> sumAllVersionNumbers(decodedPacket.subpackets)
     }
 }
 
 fun day16Part1(packet: BitsPacket): Int {
     val decoder = BitsDecoder()
-    println(decoder.decodePacket(packet))
+    val decodedPacket = decoder.decodePacket(packet)
 
-    throw NotImplementedError()
+    return sumAllVersionNumbers(decodedPacket)
 }
 
 fun day16Part2(): Int {
