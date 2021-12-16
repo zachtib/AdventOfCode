@@ -93,8 +93,50 @@ class Day16Tests {
     }
 
     @Test
-    fun `test part 2 example`() {
-        val actual = day16Part2()
+    fun `test part 2 example 1`() {
+        val actual = day16Part2(BitsPacket("C200B40A82"))
+        assertEquals(3, actual)
+    }
+
+    @Test
+    fun `test part 2 example 2`() {
+        val actual = day16Part2(BitsPacket("04005AC33890"))
+        assertEquals(54, actual)
+    }
+
+    @Test
+    fun `test part 2 example 3`() {
+        val actual = day16Part2(BitsPacket("880086C3E88112"))
+        assertEquals(7, actual)
+    }
+
+    @Test
+    fun `test part 2 example 4`() {
+        val actual = day16Part2(BitsPacket("CE00C43D881120"))
+        assertEquals(9, actual)
+    }
+
+    @Test
+    fun `test part 2 example 5`() {
+        val actual = day16Part2(BitsPacket("D8005AC2A8F0"))
+        assertEquals(1, actual)
+    }
+
+    @Test
+    fun `test part 2 example 6`() {
+        val actual = day16Part2(BitsPacket("F600BC2D8F"))
         assertEquals(0, actual)
+    }
+
+    @Test
+    fun `test part 2 example 7`() {
+        val actual = day16Part2(BitsPacket("9C005AC2F8F0"))
+        assertEquals(0, actual)
+    }
+
+    @Test
+    fun `test part 2 example 8`() {
+        val actual = day16Part2(BitsPacket("9C0141080250320F1802104A08"))
+        assertEquals(1, actual)
     }
 }

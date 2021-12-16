@@ -26,10 +26,6 @@ class Biterator(private val binaryString: String) {
         return binaryString.length - bitsTaken
     }
 
-    private fun isEmpty(): Boolean {
-        return bitsRemaining() > 0
-    }
-
     private fun takeCharacters(length: Int): String {
         val result = binaryString.substring(bitsTaken, bitsTaken + length)
         bitsTaken += result.length
@@ -77,6 +73,30 @@ sealed class DecodedBitsPacket {
         override val typeId: Int,
         val subpackets: List<DecodedBitsPacket>,
     ) : DecodedBitsPacket()
+
+    companion object {
+        private const val TYPE_ID_SUM = 0
+        private const val TYPE_ID_MUL = 1
+        private const val TYPE_ID_MIN = 2
+        private const val TYPE_ID_MAX = 3
+        private const val TYPE_ID_GT = 5
+        private const val TYPE_ID_LT = 6
+        private const val TYPE_ID_EQ = 7
+    }
+
+    fun value(): Long = when (this) {
+        is Literal -> this.value
+        is Operator -> when (this.typeId) {
+            TYPE_ID_SUM -> subpackets.sumOf { it.value() }
+            TYPE_ID_MUL -> subpackets.fold(1L) { acc, packet -> acc * packet.value()}
+            TYPE_ID_MIN -> subpackets.minOf { it.value() }
+            TYPE_ID_MAX -> subpackets.maxOf { it.value() }
+            TYPE_ID_GT -> if (subpackets[0].value() > subpackets[1].value()) 1 else 0
+            TYPE_ID_LT -> if (subpackets[0].value() < subpackets[1].value()) 1 else 0
+            TYPE_ID_EQ -> if (subpackets[0].value() == subpackets[1].value()) 1 else 0
+            else -> throw IllegalStateException("${this.typeId} is not a valid Operator Code")
+        }
+    }
 }
 
 class BitsDecoder {
@@ -92,7 +112,6 @@ class BitsDecoder {
             val initial = chunk.first().digitToInt(2)
             val remainder = chunk.substring(1)
             bitChunks += remainder
-            println("prefix: $initial, value: $remainder")
 
             chunk = if (initial == 0) {
                 null
@@ -108,11 +127,8 @@ class BitsDecoder {
         val packetVersion = biterator.takeBitsAsIntOrNull(3) ?: return null
         val typeId = biterator.takeBitsAsIntOrNull(3) ?: return null
 
-        println("version: $packetVersion, type: $typeId")
-
         if (typeId == TYPE_ID_LITERAL) {
             val decodedValue = decodeLiteralValue(biterator)
-            println("decoded value: $decodedValue")
             return DecodedBitsPacket.Literal(
                 version = packetVersion,
                 typeId = typeId,
@@ -123,7 +139,6 @@ class BitsDecoder {
 
         if (lengthTypeId == 0) {
             val totalLengthInBits = biterator.takeBitsAsInt(15)
-            println("length: $totalLengthInBits")
             val bitString = biterator.takeBitsAsString(totalLengthInBits)
             val subiterator = Biterator(bitString)
 
@@ -141,7 +156,6 @@ class BitsDecoder {
             )
         } else if (lengthTypeId == 1) {
             val numberOfSubPackets = biterator.takeBitsAsInt(11)
-            println("packets: $numberOfSubPackets")
             val subpackets = buildList {
                 repeat(numberOfSubPackets) {
                     add(decodePacket(biterator)!!)
@@ -182,8 +196,11 @@ fun day16Part1(packet: BitsPacket): Int {
     return sumAllVersionNumbers(decodedPacket)
 }
 
-fun day16Part2(): Int {
-    throw NotImplementedError()
+fun day16Part2(packet: BitsPacket): Long {
+    val decoder = BitsDecoder()
+    val decodedPacket = decoder.decodePacket(packet) ?: return -1
+
+    return decodedPacket.value()
 }
 
 fun main() {
@@ -191,5 +208,5 @@ fun main() {
     val packet = BitsPacket(input.body)
 
     part1 { day16Part1(packet) }
-    part2 { day16Part2() }
+    part2 { day16Part2(packet) }
 }
