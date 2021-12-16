@@ -1,7 +1,6 @@
 package libadvent.grid
 
 import libadvent.geometry.Coordinate
-import libadvent.geometry.Point
 import libadvent.geometry.gridCoordinate
 
 
@@ -14,7 +13,7 @@ internal object EmptyIterator : ListIterator<Nothing> {
     override fun previous(): Nothing = throw NoSuchElementException()
 }
 
-interface Grid<out T> : Iterable<T> {
+interface Grid<out T> {
     val rows: Int
     val columns: Int
 
@@ -23,6 +22,8 @@ interface Grid<out T> : Iterable<T> {
     fun containsAll(elements: Collection<@UnsafeVariance T>): Boolean
 
     operator fun get(row: Int, column: Int): T
+
+    operator fun iterator(): Iterator<T>
 }
 
 interface MutableGrid<T> : Grid<T> {

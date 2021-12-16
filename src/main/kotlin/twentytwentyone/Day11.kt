@@ -2,10 +2,7 @@ package twentytwentyone
 
 import libadvent.geometry.Coordinate
 import libadvent.geometry.get
-import libadvent.grid.Grid
-import libadvent.grid.forEachIndexed
-import libadvent.grid.map
-import libadvent.grid.pointsInGridAdjacentOrDiagonalTo
+import libadvent.grid.*
 import libadvent.part1
 import libadvent.part2
 import libadvent.resource.asGrid
