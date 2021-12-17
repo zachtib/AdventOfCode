@@ -35,7 +35,7 @@ inline fun <reified T> Grid<T>.foldAlong(fold: Fold, combine: (first: T, second:
                 // Rows will remain unchanged
                 val alternateColumn = (fold.y - column) + fold.y
                 if (alternateColumn in columnIndices) {
-                    combine(this[column, row], this[row, alternateColumn])
+                    combine(this[row, column], this[row, alternateColumn])
                 } else {
                     this[row, column]
                 }
