@@ -8,18 +8,13 @@ class BoundedGridTests {
     @Test
     fun `test building a boundedGrid`() {
         val bounds = Bounds(-2, -2, 2, 2)
-        val boundedGrid = BoundedGrid(bounds) { row, column -> "($row, $column)".padStart(9)}
+        val boundedGrid = BoundedGrid(bounds) { c -> "(${c.x}, ${c.y})".padStart(9)}
 
-        for (row in boundedGrid.rowIndices) {
-            for (column in boundedGrid.columnIndices) {
-                print(boundedGrid[row, column])
-            }
-            println()
-        }
+        println(boundedGrid.joinToString { it })
 
         val actual = boundedGrid[2, 2].trim()
         assertEquals("(2, 2)", actual)
-        val actual1 = boundedGrid[-1, -2].trim()
+        val actual1 = boundedGrid[-2, -1].trim()
         assertEquals("(-1, -2)", actual1)
     }
 }

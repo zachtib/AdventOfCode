@@ -1,6 +1,8 @@
 package libadvent.grid
 
 import libadvent.geometry.Bounds
+import libadvent.geometry.Coordinate
+import libadvent.geometry.gridCoordinate
 
 interface BoundedGrid<T> : Grid<T> {
     val bounds: Bounds
@@ -73,6 +75,24 @@ inline fun <reified T> MutableBoundedGrid(bounds: Bounds, init: (row: Int, colum
 }
 
 @Suppress("FunctionName")
+inline fun <reified T> MutableBoundedGrid(bounds: Bounds, init: (coordinate: Coordinate) -> T): MutableBoundedGrid<T> {
+    val rows = bounds.maxX - bounds.minX + 1
+    val columns = bounds.maxY - bounds.minY + 1
+
+    val array = Array(rows) { row ->
+        Array(columns) { column ->
+            init(gridCoordinate(row + bounds.minX, column + bounds.minY))
+        }
+    }
+    return MutableBoundedGrid(bounds, array)
+}
+
+@Suppress("FunctionName")
 inline fun <reified T> BoundedGrid(bounds: Bounds, elementBuilder: (row: Int, column: Int) -> T): BoundedGrid<T> {
+    return MutableBoundedGrid(bounds, elementBuilder)
+}
+
+@Suppress("FunctionName")
+inline fun <reified T> BoundedGrid(bounds: Bounds, elementBuilder: (coordinate: Coordinate) -> T): BoundedGrid<T> {
     return MutableBoundedGrid(bounds, elementBuilder)
 }
