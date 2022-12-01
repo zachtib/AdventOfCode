@@ -11,6 +11,16 @@ fun Resource.asInts(): List<Int> = items.map { it.toInt() }
 
 fun Resource.asLongs(): List<Long> = items.map { it.toLong() }
 
+fun <T> Resource.asLists(transform: (String) -> T): List<List<T>> {
+    return body.split("\n\n")
+        .map { group ->
+            group.split("\n")
+                .map(transform)
+        }
+}
+
+fun Resource.asListsOfInts() = asLists { it.toInt() }
+
 inline fun <reified T> Resource.as2dArray(transform: (Char) -> T): Array<Array<T>> {
     val rows = items
     return Array(rows.size) { rowIndex: Int ->
